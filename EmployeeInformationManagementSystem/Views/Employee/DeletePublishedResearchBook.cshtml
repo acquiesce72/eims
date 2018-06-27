@@ -1,0 +1,65 @@
+﻿@model EmployeeInformationManagementSystem.Models.EmployeePublishedResearchBook
+
+@{
+    ViewBag.Title = "Delete Published Books and Researches";
+}
+
+<section class="content-header">
+    <h1>
+        <small><b>Are you sure you want to delete this?</b></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-child"></i> Employee</li>
+        <li><i class="fa fa-list-alt"></i> List of Employees</li>
+        <li><i class="fa fa-info-circle"></i> Employee Details</li>
+        <li class="active"><i class="fa fa-trash"></i> Delete Published Books and Researches</li>
+    </ol>
+</section>
+
+<section class="invoice">
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Published Books and Researches Details
+            </h2>
+        </div>
+    </div>
+
+    <div class="row invoice-info">
+        <div class="col-sm-4 invoice-col">
+            <address>
+                <strong>Title</strong><br />
+                @Html.TextBoxFor(model => model.title, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Nature</strong><br />
+                @Html.TextBoxFor(model => model.nature, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Role</strong><br />
+                @Html.TextBoxFor(model => model.role, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Level</strong><br />
+                @Html.TextBoxFor(model => model.pbr_level, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Publisher</strong><br />
+                @Html.TextBoxFor(model => model.publisher, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Date Publication</strong><br />
+                @{
+                    DateTime dt = Convert.ToDateTime(Model.date_publication.ToString());
+                    var date = dt.ToShortDateString();
+                }
+                <input class="form-control no-gray" type="text" value="@date" readonly /><br />
+            </address>
+        </div>
+    </div>
+
+    <div class="row no-print">
+        <div class="col-xs-12">
+            <!--<a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a> -->
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color pull-right">
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<div class="clearfix"></div>

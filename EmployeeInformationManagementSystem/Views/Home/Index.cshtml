@@ -1,0 +1,1120 @@
+﻿@{
+    ViewBag.Title = "Employee Information Management System of Divine Word College of Laoag";
+    int i = 0;
+    int x = 0;
+}
+
+<section class="content-header">
+    <h1>
+
+        @if (Session["User_role"].ToString() == "Dean SAS" || Session["User_role"].ToString() == "Dean SBA" || Session["User_role"].ToString() == "Dean SE" || Session["User_role"].ToString() == "Dean SEA" || Session["User_role"].ToString() == "Dean SIT" || Session["User_role"].ToString() == "Dean SN" || Session["User_role"].ToString() == "Principal Elementary" || Session["User_role"].ToString() == "Principal High School")
+        {           
+            <small>@Session["dept"].ToString() Employees</small>
+        }
+
+        @if (Session["User_role"].ToString() == "VPA" || Session["User_role"].ToString() == "VPAA")
+        {
+            <small>@Session["emp_type"].ToString() Employees</small>
+        }
+        &nbsp;
+    </h1>
+    <ol class="breadcrumb">
+        <li class="active"><a href="@Url.Action("Index", "Home")"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="row">
+
+        @if (Session["User_role"].ToString() == "President")
+        {
+            <div class="col-md-3">
+                <div class="small-box bg-aqua">
+                    <div class="inner">
+                        <h3>@ViewBag.CountEmployees</h3>
+                        <h5><b>TOTAL EMPLOYEES</b></h5>
+                    </div>
+                    <div class="icon">
+                        <i class="ion-ios-people"></i>
+                    </div>
+                    <a href="@Url.Action("Index", "Employee")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="small-box bg-olive">
+                    <div class="inner">
+                        <h3>@ViewBag.CountEmployeesActive</h3>
+                        <h5><b>ACTIVE EMPLOYEES</b></h5>
+                    </div>
+                    <div class="icon">
+                        <i class="ion-ios-people"></i>
+                    </div>
+                    <a href="@Url.Action("Index", "Employee")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="small-box bg-maroon">
+                    <div class="inner">
+                        <h3>@ViewBag.CountEmployeesPassive</h3>
+                        <h6><b>PASSIVE EMPLOYEES</b></h6>
+                    </div>
+                    <div class="icon">
+                        <i class="ion-ios-people"></i>
+                    </div>
+                    <a href="@Url.Action("Index", "Employee")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="small-box bg-red">
+                    <div class="inner">
+                        <h3>@ViewBag.CountApplicants</h3>
+                        <h5><b>APPLICANTS</b></h5>
+                    </div>
+                    <div class="icon">
+                        <i class="ion-person-stalker"></i>
+                    </div>
+                    <a href="@Url.Action("Index", "Applicant")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+        }
+
+        @if (Session["User_role"].ToString() == "Administrator")
+        {
+            <div class="col-md-2">
+                <div class="small-box bg-aqua">
+                    <div class="inner">
+                        <h3>@ViewBag.CountEmployees</h3>
+                        <h5><b>TOTAL EMPLOYEES</b></h5>
+                    </div>
+                    <div class="icon">
+                        <i class="ion-ios-people"></i>
+                    </div>
+                    <a href="@Url.Action("Index", "Employee")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="small-box bg-olive">
+                    <div class="inner">
+                        <h3>@ViewBag.CountEmployeesActive</h3>
+                        <h5><b>ACTIVE</b></h5>
+                    </div>
+                    <div class="icon">
+                        <i class="ion-ios-people"></i>
+                    </div>
+                    <a href="@Url.Action("Index", "Employee")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="small-box bg-maroon">
+                    <div class="inner">
+                        <h3>@ViewBag.CountEmployeesPassive</h3>
+                        <h6><b>PASSIVE EMPLOYEES</b></h6>
+                    </div>
+                    <div class="icon">
+                        <i class="ion-ios-people"></i>
+                    </div>
+                    <a href="@Url.Action("Index", "Employee")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="small-box bg-red">
+                    <div class="inner">
+                        <h3>@ViewBag.CountApplicants</h3>
+                        <h5><b>APPLICANTS</b></h5>
+                    </div>
+                    <div class="icon">
+                        <i class="ion-person-stalker"></i>
+                    </div>
+                    <a href="@Url.Action("Index", "Applicant")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="small-box bg-green">
+                    <div class="inner">
+                        <h3>@ViewBag.CountTrainingsSeminars</h3>
+                        <!--<h3>53<sup style="font-size: 20px">%</sup></h3> -->
+                        <h6><b>TRAININGS &amp; SEMINARS</b></h6>
+                    </div>
+                    <div class="icon">
+                        <i class="ion-earth"></i>
+                    </div>
+                    <a href="@Url.Action("Index", "TrainingSeminar")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+
+            <div class="col-md-2">
+                <div class="small-box bg-primary">
+                    <div class="inner">
+                        <h3>@ViewBag.CountUsers</h3>
+                        <h5><b>USERS</b></h5>
+                    </div>
+                    <div class="icon">
+                        <i class="ion-android-contact"></i>
+                    </div>
+                    <a href="@Url.Action("Index", "Semester")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+        }
+
+        @if (Session["User_role"].ToString() == "Administrator" || Session["User_role"].ToString() == "President")
+        {
+            <div class="col-md-8">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">@DateTime.Now.Year and @DateTime.Now.AddYears(-1).Year Employment Comparison</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="chart">
+                            <canvas id="areaChart" style="height:250px"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Latest Employees</h3>
+                        <span class="label label-danger"></span>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="box-body no-padding">
+                        <ul class="users-list clearfix">
+                            @foreach (var le in ViewBag.LatestEmployee)
+                            {
+                                var employment_date = string.Empty;
+                                <li>
+                                    <img src="@Url.Action("EmployeePicture", "Home", new { id = le.employee_id})" class="img-circle" alt="User Image" width="60" height="60">
+                                    <a class="users-list-name" href="@Url.Action("Details", "Employee" , new { id=le.employee_id })">@le.firstname @le.lastname</a>
+                                    <i>@le.position</i>
+                                    @{
+                                        if (le.employment_date != null)
+                                        {
+                                            DateTime ed = Convert.ToDateTime(le.employment_date.ToString());
+                                            employment_date = ed.ToString("MMM dd");
+                                        }
+                                        else
+                                        {
+                                            employment_date = string.Empty;
+                                        }
+                                    }
+                                    <span class="users-list-date">@employment_date</span>
+                                </li>
+
+                                            if (++i == 8) { break; }
+                                        }
+
+                        </ul>
+
+                    </div>
+
+                    <div class="box-footer text-center">
+                        <a href="@Url.Action("Index", "Employee")" class="uppercase">View All Employees</a>
+                    </div>
+                </div>
+            </div>
+          
+            <div class="col-md-8">
+                <div class="box box-danger">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Applicants - @DateTime.Now.Year and @DateTime.Now.AddYears(-1).Year Comparison </h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="chart">
+                            <canvas id="lineChart" style="height:250px"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="box box-danger">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Recently Added Applicants</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <ul class="products-list product-list-in-box">
+                            @foreach (var ra in ViewBag.RecentApplicant)
+                            {
+                                var dc = string.Empty;
+                                <li class="item">
+                                    <div class="product-img">
+                                        <img src="@Url.Action("ApplicantPicture", "Home", new { id = ra.applicant_id})" class="img-circle" alt="User Image" width="60" height="60">
+                                    </div>
+                                    <div class="product-info">
+                                        @{
+                                            if (ra.date_created != null)
+                                            {
+                                                DateTime ed = Convert.ToDateTime(ra.date_created.ToString());
+                                                dc = ed.ToString("MMM dd");
+                                            }
+                                            else
+                                            {
+                                                dc = string.Empty;
+                                            }
+                                        }
+                                        <a href="@Url.Action("Details", "Applicant" , new { id=ra.applicant_id })" class="product-title">
+                                            @ra.firstname @ra.lastname
+
+                                        </a>
+                                        <span class="users-list-date pull-right">Added @dc</span>
+
+                                        @{
+                                            DateTime now = DateTime.Today;
+                                            int age = now.Year - ra.birth_date.Year;
+                                            if (now < ra.birth_date.AddYears(age))
+                                            {
+                                                age--;
+                                            }
+                                        }
+
+                                        <span class="product-description">
+                                            @age years old
+                                        </span>
+                                    </div>
+                                </li>
+                                                if (++x == 4) { break; }
+                                            }
+                        </ul>
+                    </div>
+                    <div class="box-footer text-center">
+                        <a href="@Url.Action("Index", "Applicant")" class="uppercase">View All Applicants</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- 
+            <div class="col-md-8">
+                <div class="box box-success">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Trainings and Seminars</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="chart">
+                            <canvas id="barChart" style="height:230px"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+
+            <div class="col-md-4">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Gender (Active)</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="chart-responsive">
+                                    <canvas id="pieChart1" height="220"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <ul class="chart-legend clearfix">
+                                    <li><i class="fa fa-male" style="color:#0082c8;"></i> Male</li>
+                                    <li><i class="fa fa-female" style="color:#ff63f7;"></i> Female</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Civil Status (Active)</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="chart-responsive">
+                                    <canvas id="pieChart2" height="220"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <ul class="chart-legend clearfix">
+                                    <li><i class="fa fa-circle" style="color:#20c73e;"></i> Single</li>
+                                    <li><i class="fa fa-circle" style="color:#ff0000;"></i> Married</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Appointment Status (Active)</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="chart-responsive">
+                                    <canvas id="pieChart3" height="320"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <ul class="chart-legend clearfix">
+                                    <li><i class="fa fa-circle" style="color:#ebd817;"></i> Substitute</li>
+                                    <li><i class="fa fa-circle" style="color:#ff0000;"></i> Part-time</li>
+                                    <li><i class="fa fa-circle" style="color:#0082c8;"></i> Probationary</li>
+                                    <li><i class="fa fa-circle" style="color:#20c73e;"></i> Permanent</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-5">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Employment Type (Active)</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="chart-responsive">
+                                    <canvas id="pieChart" height="270"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <ul class="chart-legend clearfix">
+                                    <li><i class="fa fa-circle" style="color:#20c73e;"></i> Administrator</li>
+                                    <li><i class="fa fa-circle" style="color:#0082c8;"></i> Faculty</li>
+                                    <li><i class="fa fa-circle" style="color:#ff0000;"></i> Personnel</li>
+                                    <li><i class="fa fa-circle" style="color:#ebd817;"></i> Staff</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="chart-responsive">
+                                    <canvas id="pieChart4" height="320"></canvas>
+                                </div>
+                            </div>    
+                            <div class="col-md-7">
+                                <ul class="chart-legend clearfix">
+                                    <li><i class="fa fa-circle text-aqua"></i> School of Arts and Sciences</li>
+                                    <li><i class="fa fa-circle text-red"></i> School of Business and Accountancy</li>
+                                    <li><i class="fa fa-circle text-green"></i> School of Education</li>
+                                    <li><i class="fa fa-circle text-aqua"></i> School of Engineering and Architecture</li>
+                                    <li><i class="fa fa-circle text-red"></i> School of Information Technology</li>
+                                    <li><i class="fa fa-circle text-green"></i> School of Nursing</li>
+                                    <li><i class="fa fa-circle text-aqua"></i> School of Basic Education (Elementary)</li>
+                                    <li><i class="fa fa-circle text-red"></i> School of Basic Education (High School)</li>
+                                </ul>
+                            </div>                      
+                        </div>
+                    </div>-->
+            <div class="col-md-7">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Department (Active)</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body chart-responsive">
+                        <div class="chart" id="dept-chart" style="height: 300px; position: relative;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-5">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Educational Attainment (Active)</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="chart-responsive">
+                                    <canvas id="pieChart5" height="220"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <ul class="chart-legend clearfix">
+                                    <li><i class="fa fa-circle" style="color:#20c73e;"></i> Postgraduate</li>
+                                    <li><i class="fa fa-circle" style="color:#0082c8;"></i> Graduate</li>
+                                    <li><i class="fa fa-circle" style="color:#ff0000;"></i> Undergraduate</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Working Status (Active)</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="chart-responsive">
+                                    <canvas id="pieChart6" height="220"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <ul class="chart-legend clearfix">
+                                    <li><i class="fa fa-circle" style="color:#ff0000;"></i> Part-time</li>
+                                    <li><i class="fa fa-circle" style="color:#20c73e;"></i> Full-time</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }         
+
+
+        @if (Session["User_role"].ToString() == "Dean SAS" || Session["User_role"].ToString() == "Dean SBA" || Session["User_role"].ToString() == "Dean SE" || Session["User_role"].ToString() == "Dean SEA" || Session["User_role"].ToString() == "Dean SIT" || Session["User_role"].ToString() == "Dean SN" || Session["User_role"].ToString() == "Principal Elementary" || Session["User_role"].ToString() == "Principal High School")
+        {
+            <div class="col-md-4">
+                <div class="small-box bg-aqua">
+                    <div class="inner">
+                        <h3>@ViewBag.CountEmployees</h3>
+                        <h5><b>TOTAL EMPLOYEES</b></h5>
+                    </div>
+                    <div class="icon">
+                        <i class="ion-ios-people"></i>
+                    </div>
+                    <a href="@Url.Action("Index", "Employee")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="small-box bg-olive">
+                    <div class="inner">
+                        <h3>@ViewBag.CountEmployeesActive</h3>
+                        <h5><b>ACTIVE EMPLOYEES</b></h5>
+                    </div>
+                    <div class="icon">
+                        <i class="ion-ios-people"></i>
+                    </div>
+                    <a href="@Url.Action("Index", "Employee")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="small-box bg-maroon">
+                    <div class="inner">
+                        <h3>@ViewBag.CountEmployeesPassive</h3>
+                        <h5><b>PASSIVE EMPLOYEES</b></h5>
+                    </div>
+                    <div class="icon">
+                        <i class="ion-ios-people"></i>
+                    </div>
+                    <a href="@Url.Action("Index", "Employee")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">@DateTime.Now.Year and @DateTime.Now.AddYears(-1).Year Employment Comparison</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="chart">
+                            <canvas id="areaChart" style="height:250px"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Latest Employees</h3>
+                        <span class="label label-danger"></span>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="box-body no-padding">
+                        <ul class="users-list clearfix">
+                            @foreach (var le in ViewBag.LatestEmployee)
+                            {
+                                var employment_date = string.Empty;
+                                <li>
+                                    <img src="@Url.Action("EmployeePicture", "Home", new { id = le.employee_id})" class="img-circle" alt="User Image" width="60" height="60">
+                                    <a class="users-list-name" href="@Url.Action("Details", "Employee" , new { id=le.employee_id })">@le.firstname @le.lastname</a>
+                                    <i>@le.position</i>
+                                    @{
+                                        if (le.employment_date != null)
+                                        {
+                                            DateTime ed = Convert.ToDateTime(le.employment_date.ToString());
+                                            employment_date = ed.ToString("MMM dd");
+                                        }
+                                        else
+                                        {
+                                            employment_date = string.Empty;
+                                        }
+                                    }
+                                    <span class="users-list-date">@employment_date</span>
+                                </li>
+
+                                            if (++i == 8) { break; }
+                            }
+
+                        </ul>
+
+                    </div>
+
+                    <div class="box-footer text-center">
+                        <a href="@Url.Action("Index", "Employee")" class="uppercase">View All Employees</a>
+                    </div>
+                </div>
+            </div>     
+            <div class="col-md-12"></div>
+            <div class="col-md-4">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Gender (Active)</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="chart-responsive">
+                                    <canvas id="pieChart1" height="220"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <ul class="chart-legend clearfix">
+                                    <li><i class="fa fa-male" style="color:#0082c8;"></i> Male</li>
+                                    <li><i class="fa fa-female" style="color:#ff63f7;"></i> Female</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Civil Status (Active)</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="chart-responsive">
+                                    <canvas id="pieChart2" height="220"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <ul class="chart-legend clearfix">
+                                    <li><i class="fa fa-circle" style="color:#20c73e;"></i> Single</li>
+                                    <li><i class="fa fa-circle" style="color:#ff0000;"></i> Married</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Appointment Status (Active)</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="chart-responsive">
+                                    <canvas id="pieChart3" height="320"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <ul class="chart-legend clearfix">
+                                    <li><i class="fa fa-circle" style="color:#ebd817;"></i> Substitute</li>
+                                    <li><i class="fa fa-circle" style="color:#ff0000;"></i> Part-time</li>
+                                    <li><i class="fa fa-circle" style="color:#0082c8;"></i> Probationary</li>
+                                    <li><i class="fa fa-circle" style="color:#20c73e;"></i> Permanent</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Employment Type (Active)</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="chart-responsive">
+                                    <canvas id="pieChart" height="270"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="chart-legend clearfix">
+                                    <li><i class="fa fa-circle" style="color:#20c73e;"></i> Administrator</li>
+                                    <li><i class="fa fa-circle" style="color:#0082c8;"></i> Faculty</li>
+                                    <li><i class="fa fa-circle" style="color:#ff0000;"></i> Personnel</li>
+                                    <li><i class="fa fa-circle" style="color:#ebd817;"></i> Staff</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Educational Attainment (Active)</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="chart-responsive">
+                                    <canvas id="pieChart5" height="220"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="chart-legend clearfix">
+                                    <li><i class="fa fa-circle" style="color:#20c73e;"></i> Postgraduate</li>
+                                    <li><i class="fa fa-circle" style="color:#0082c8;"></i> Graduate</li>
+                                    <li><i class="fa fa-circle" style="color:#ff0000;"></i> Undergraduate</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Working Status (Active)</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="chart-responsive">
+                                    <canvas id="pieChart6" height="220"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <ul class="chart-legend clearfix">
+                                    <li><i class="fa fa-circle" style="color:#ff0000;"></i> Part-time</li>
+                                    <li><i class="fa fa-circle" style="color:#20c73e;"></i> Full-time</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>       
+        }
+
+        @if (Session["User_role"].ToString() == "VPA" || Session["User_role"].ToString() == "VPAA")
+        {
+            <div class="col-md-4">
+                <div class="small-box bg-aqua">
+                    <div class="inner">
+                        <h3>@ViewBag.CountEmployees</h3>
+                        <h5><b>TOTAL EMPLOYEES</b></h5>
+                    </div>
+                    <div class="icon">
+                        <i class="ion-ios-people"></i>
+                    </div>
+                    <a href="@Url.Action("Index", "Employee")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="small-box bg-olive">
+                    <div class="inner">
+                        <h3>@ViewBag.CountEmployeesActive</h3>
+                        <h5><b>ACTIVE EMPLOYEES</b></h5>
+                    </div>
+                    <div class="icon">
+                        <i class="ion-ios-people"></i>
+                    </div>
+                    <a href="@Url.Action("Index", "Employee")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="small-box bg-maroon">
+                    <div class="inner">
+                        <h3>@ViewBag.CountEmployeesPassive</h3>
+                        <h5><b>PASSIVE EMPLOYEES</b></h5>
+                    </div>
+                    <div class="icon">
+                        <i class="ion-ios-people"></i>
+                    </div>
+                    <a href="@Url.Action("Index", "Employee")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">@DateTime.Now.Year and @DateTime.Now.AddYears(-1).Year Employment Comparison</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="chart">
+                            <canvas id="areaChart" style="height:250px"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Latest Employees</h3>
+                        <span class="label label-danger"></span>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="box-body no-padding">
+                        <ul class="users-list clearfix">
+                            @foreach (var le in ViewBag.LatestEmployee)
+                            {
+                                var employment_date = string.Empty;
+                                <li>
+                                    <img src="@Url.Action("EmployeePicture", "Home", new { id = le.employee_id})" class="img-circle" alt="User Image" width="60" height="60">
+                                    <a class="users-list-name" href="@Url.Action("Details", "Employee" , new { id=le.employee_id })">@le.firstname @le.lastname</a>
+                                    <i>@le.position</i>
+                                    @{
+                                        if (le.employment_date != null)
+                                        {
+                                            DateTime ed = Convert.ToDateTime(le.employment_date.ToString());
+                                            employment_date = ed.ToString("MMM dd");
+                                        }
+                                        else
+                                        {
+                                            employment_date = string.Empty;
+                                        }
+                                    }
+                                    <span class="users-list-date">@employment_date</span>
+                                </li>
+
+                                            if (++i == 8) { break; }
+                                        }
+
+                        </ul>
+
+                    </div>
+
+                    <div class="box-footer text-center">
+                        <a href="@Url.Action("Index", "Employee")" class="uppercase">View All Employees</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12"></div>
+            <div class="col-md-4">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Gender (Active)</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="chart-responsive">
+                                    <canvas id="pieChart1" height="220"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <ul class="chart-legend clearfix">
+                                    <li><i class="fa fa-male" style="color:#0082c8;"></i> Male</li>
+                                    <li><i class="fa fa-female" style="color:#ff63f7;"></i> Female</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Civil Status (Active)</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="chart-responsive">
+                                    <canvas id="pieChart2" height="220"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <ul class="chart-legend clearfix">
+                                    <li><i class="fa fa-circle" style="color:#20c73e;"></i> Single</li>
+                                    <li><i class="fa fa-circle" style="color:#ff0000;"></i> Married</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Appointment Status (Active)</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="chart-responsive">
+                                    <canvas id="pieChart3" height="320"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <ul class="chart-legend clearfix">
+                                    <li><i class="fa fa-circle" style="color:#ebd817;"></i> Substitute</li>
+                                    <li><i class="fa fa-circle" style="color:#ff0000;"></i> Part-time</li>
+                                    <li><i class="fa fa-circle" style="color:#0082c8;"></i> Probationary</li>
+                                    <li><i class="fa fa-circle" style="color:#20c73e;"></i> Permanent</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Educational Attainment (Active)</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="chart-responsive">
+                                    <canvas id="pieChart5" height="220"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="chart-legend clearfix">
+                                    <li><i class="fa fa-circle" style="color:#20c73e;"></i> Postgraduate</li>
+                                    <li><i class="fa fa-circle" style="color:#0082c8;"></i> Graduate</li>
+                                    <li><i class="fa fa-circle" style="color:#ff0000;"></i> Undergraduate</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Working Status (Active)</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="chart-responsive">
+                                    <canvas id="pieChart6" height="220"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <ul class="chart-legend clearfix">
+                                    <li><i class="fa fa-circle" style="color:#ff0000;"></i> Part-time</li>
+                                    <li><i class="fa fa-circle" style="color:#20c73e;"></i> Full-time</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                                        }
+
+    </div>
+</section>
+
+
+
+
+
+
+
+

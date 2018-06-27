@@ -1,0 +1,62 @@
+﻿@model IEnumerable<EmployeeInformationManagementSystem.Models.EmployeeUploadedFile>
+
+@{
+    ViewBag.Title = "Download Employee File";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        &nbsp;
+    </h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-users"></i> Employee</li>
+        <li><i class="fa fa-list-alt"></i> List of Employees</li>
+        <li class="active"><i class="fa fa-download"></i> Download Employee File</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="box box-info">
+        <div class="box-header">
+
+        </div>
+        <div class="box-body">
+
+            @using (Html.BeginForm("DownloadFile", "Employee", FormMethod.Post))
+            {
+                <input type="hidden" id="hfFileId" name="FileId" />
+                <input type="submit" id="btnDownload" value="Download" style="display:none" />
+            }
+
+            <table id="thistable2" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>File name</th>
+                        <th>Action</th>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr align="center">
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.filename)
+                            </td>
+
+                            <td>
+                                <button type="button" class="btn btn-flat btn-sm btn-success" onclick="DownloadFile(@item.file_id)">Download</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+</section>
+<!-- /.content -->

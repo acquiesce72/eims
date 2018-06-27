@@ -1,0 +1,71 @@
+﻿@model EmployeeInformationManagementSystem.Models.EmployeeServiceRecord
+
+@{
+    ViewBag.Title = "Update Service Record";
+}
+
+<section class="content-header">
+    <h1>
+        &nbsp;
+    </h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-child"></i> Employee</li>
+        <li><i class="fa fa-list-alt"></i> List of Employees</li>
+        <li><i class="fa fa-info-circle"></i> Employee Details</li>
+        <li class="active"><i class="fa fa-edit"></i> Update Service Record</li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <form role="form">
+                <!-- left column -->
+                <div class="col-md-6">
+                    <!-- general form elements -->
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Service Record Information</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <!-- form start -->
+                        <div class="box-body">
+                            @Html.HiddenFor(model => model.sr_id)
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.years_in_organization, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.years_in_organization, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.years_in_organization, "", new { @class = "text-danger" })
+
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.years_in_probationary, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.years_in_probationary, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.years_in_probationary, "", new { @class = "text-danger" })
+
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.years_of_permanent, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.years_of_permanent, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.years_of_permanent, "", new { @class = "text-danger" })
+
+                            </div>
+
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <input type="submit" value="Save" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        }
+    </div>
+</section>
+

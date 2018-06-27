@@ -1,0 +1,1729 @@
+﻿@model EmployeeInformationManagementSystem.Models.Employee
+
+@{
+    ViewBag.Title = "Employee Details";
+    var url = Url.RequestContext.RouteData.Values["id"];
+}
+
+<section class="content-header">
+    <h1>
+        @if (Session["User_role"].ToString() != "Employee")
+        {
+            <small><b>Details of @Html.DisplayFor(model => model.firstname) @Html.DisplayFor(model => model.middlename) @Html.DisplayFor(model => model.lastname)</b></small>
+        }
+        &nbsp;
+    </h1>
+
+    @{
+        if (Session["User_role"].ToString() == "Employee")
+        {
+            <ol class="breadcrumb">
+                <li class="active"><i class="fa fa-file-text"></i> My Employee Record</li>
+            </ol>
+        }
+        else
+        {
+            <ol class="breadcrumb">
+                <li><i class="fa fa-users"></i> Employee</li>
+                <li><i class="fa fa-list-alt"></i> List of Employees</li>
+                <li class="active"><i class="fa fa-info-circle"></i> Employee Details</li>
+            </ol>
+        }
+    }
+    
+</section>
+
+<section class="invoice">
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                <i class="fa fa-user"></i> Employee Details
+                @if (Session["User_role"].ToString() == "Administrator")
+                {
+                    <small class="pull-right">Record ID: @Html.DisplayFor(model => model.employee_id)</small>
+                }           
+            </h2>
+        </div>
+    </div>
+    <div class="row invoice-info">
+        <div class="col-sm-4 invoice-col">
+            <address>
+                <strong>Employee Number</strong><br />
+                @Html.TextBoxFor(model => model.employee_number, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>First Name</strong><br />
+                @Html.TextBoxFor(model => model.firstname, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Middle Name</strong><br />
+                @Html.TextBoxFor(model => model.middlename, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Last Name</strong><br />
+                @Html.TextBoxFor(model => model.lastname, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Birth Date</strong><br />
+                @{
+                    DateTime dt = Convert.ToDateTime(Model.birth_date.ToString());
+                    var date = dt.ToShortDateString();
+                }
+                <input class="form-control no-gray" type="text" value="@date" readonly /><br />
+                <strong>Birth Place</strong><br />
+                @Html.TextBoxFor(model => model.birth_place, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+               
+                @{ 
+                    DateTime now = DateTime.Today;
+                    int age = now.Year - Model.birth_date.Year;
+                    if (now < Model.birth_date.AddYears(age))
+                    {
+                        age--;
+                    }
+                }
+
+                 <strong>Age</strong><br />
+                <input class="form-control no-gray" type="text" value="@age" readonly /><br />
+                <strong>Gender</strong><br />
+                @Html.TextBoxFor(model => model.gender, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Civil Status</strong><br />
+                @Html.TextBoxFor(model => model.civil_status, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Contact Number</strong><br />
+                @Html.TextBoxFor(model => model.contact_number, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                
+                
+            </address>
+        </div>
+
+        <div class="col-sm-4 invoice-col">
+            <address>
+                
+                <strong>Address</strong><br />
+                @Html.TextBoxFor(model => model.address, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Height</strong><br />
+                @Html.TextBoxFor(model => model.height, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Weight</strong><br />
+                @Html.TextBoxFor(model => model.weight, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Citizenship</strong><br />
+                @Html.TextBoxFor(model => model.citizenship, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Blood Type</strong><br />
+                @Html.TextBoxFor(model => model.blood_type, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Contact Person</strong><br />
+                @Html.TextBoxFor(model => model.contact_person, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Marriage Date</strong><br />
+                @{
+                    var mad = "";
+
+                    if(Model.marriage_date != null)
+                    {
+                        DateTime md = Convert.ToDateTime(Model.marriage_date.ToString());
+                        mad = md.ToShortDateString();
+                    }
+
+                }
+                <input class="form-control no-gray" type="text" value="@mad" readonly /><br />
+                <strong>Marriage Place</strong><br />
+                @Html.TextBoxFor(model => model.marriage_place, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Spouse Name</strong><br />
+                @Html.TextBoxFor(model => model.spouse_name, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Spouse Occupation</strong><br />
+                @Html.TextBoxFor(model => model.spouse_occupation, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                
+                
+            </address>
+        </div>
+
+        <div class="col-sm-4 invoice-col">
+
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;
+
+            <img src="@Url.Action("EmployeePicture", "Home", new { id = url })" class="img-circle pull-center" alt="User Image" width="190" height="190">
+            <center><strong>Employee Image</strong></center>
+            <br />
+
+            <strong>Fathers Name</strong><br />
+            @Html.TextBoxFor(model => model.father_name, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+            <strong>Fathers Occupation</strong><br />
+            @Html.TextBoxFor(model => model.father_occupation, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+            <strong>Mothers Name</strong><br />
+            @Html.TextBoxFor(model => model.mother_name, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+            <strong>Mothers Occupation</strong><br />
+            @Html.TextBoxFor(model => model.mother_occupation, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+            <strong>Confirmation Date</strong><br />
+            @{
+                DateTime cd = Convert.ToDateTime(Model.confirmation_date.ToString());
+                var cod = cd.ToShortDateString();
+            }
+            <input class="form-control no-gray" type="text" value="@cod" readonly /><br />
+            <strong>Confirmation Place</strong><br />
+            @Html.TextBoxFor(model => model.confirmation_place, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+
+            @{
+                var status = "";
+
+                if (Model.is_active)
+                {
+                    status = "Active";
+                }
+
+                else
+                {
+                    status = "Passive";
+                }
+            }
+
+            <strong>Employment Status</strong><br />
+            <input class="form-control no-gray" type="text" value="@status" readonly /><br />
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Employee Record
+            </h2>
+        </div>
+    </div>
+    <div class="row invoice-info">
+        <div class="col-sm-4 invoice-col">
+            <address>
+                <strong>SSS</strong><br />
+                @Html.TextBoxFor(model => model.sss, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Tin</strong><br />
+                @Html.TextBoxFor(model => model.tin, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Pag-IBIG</strong><br />
+                @Html.TextBoxFor(model => model.pagibig, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>PhilHealth</strong><br />
+                @Html.TextBoxFor(model => model.philhealth, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Employment Date</strong><br />
+                @{
+                    var empd = "";
+
+                    if(Model.employment_date != null)
+                    {
+                        DateTime emd = Convert.ToDateTime(Model.employment_date.ToString());
+                        empd = emd.ToShortDateString();
+                    }
+
+                }
+                <input class="form-control no-gray" type="text" value="@empd" readonly /><br />
+            </address>
+        </div>
+
+        <div class="col-sm-4 invoice-col">
+            <address>
+                <strong>Department</strong><br />
+                @Html.TextBoxFor(model => model.department, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Educational Attainment</strong><br />
+                @Html.TextBoxFor(model => model.educational_attainment, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Date Permanent</strong><br />
+                @{
+                    var dep = "";
+
+                    if(Model.date_permanent != null)
+                    {
+                        DateTime dp = Convert.ToDateTime(Model.date_permanent.ToString());
+                        dep = dp.ToShortDateString();
+                    }
+                }
+                <input class="form-control no-gray" type="text" value="@dep" readonly /><br />
+                <strong>Appointment Status</strong><br />
+                @Html.TextBoxFor(model => model.appointment_status, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+            </address>
+        </div>
+        <div class="col-sm-4 invoice-col">
+            <address>
+                <strong>Employment Type</strong><br />
+                @Html.TextBoxFor(model => model.employment_type, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Position</strong><br />
+                @Html.TextBoxFor(model => model.position, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Working Status</strong><br />
+                @Html.TextBoxFor(model => model.working_status, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Semester</strong><br />
+                @Html.TextBoxFor(model => model.semester, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+            </address>
+        </div>
+    </div>
+
+    
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Educational Background 
+                @if (Session["User_role"].ToString() == "Administrator")
+                {
+                    <button type="button" class="btn btn-xs btn-primary btn-primary-outline" onclick="location.href='@Url.Action("EducationalBackground", "Employee" , new { id= url })'"><span class="fa fa-plus"></span></button>
+                }               
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        @if (Session["User_role"].ToString() == "Administrator")
+                        {
+                            <th>Action</th>
+                        }
+                        
+                        <th>School</th>
+                        <th>Level</th>
+                        <th>Year Graduated</th>
+                        <th>Honors</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var eb in ViewBag.EmployeeEducationalBackground) {
+                        <tr>
+                            @if (Session["User_role"].ToString() == "Administrator")
+                            {
+                                <td>
+                                    <button type="button" class="btn btn-xs btn-warning btn-primary-outline" onclick="location.href='@Url.Action("EditEducationalBackground", "Employee" , new { id=eb.eb_id, back = eb.employee_id })'"><span class="fa fa-edit"></span></button>
+                                    <button type="button" class="btn btn-xs btn-danger btn-primary-outline" onclick="location.href='@Url.Action("DeleteEducationalBackground", "Employee" , new { id=eb.eb_id, back = eb.employee_id })'"><span class="fa fa-remove"></span></button>
+                                </td>
+                            }
+                            
+                            <td>
+                                @eb.school
+                            </td>
+                            <td>
+                                @eb.school_level
+                            </td>
+                            <td>
+                                @eb.year_graduated
+                            </td>
+                            <td>
+                                @eb.honors
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+      
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Scholarship
+                @if (Session["User_role"].ToString() == "Administrator")
+                {
+                    <button type="button" class="btn btn-xs btn-primary btn-primary-outline" onclick="location.href='@Url.Action("Scholarship", "Employee" , new { id= url })'"><span class="fa fa-plus"></span></button>
+                }  
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        @if (Session["User_role"].ToString() == "Administrator")
+                        {
+                            <th>Action</th>
+                        }
+                        
+                        <th>Title</th>
+                        <th>Nature</th>
+                        <th>Sponsor</th>
+                        <th>Inclusive Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var es in ViewBag.EmployeeScholarship)
+                    {
+                        <tr>
+                            @if (Session["User_role"].ToString() == "Administrator")
+                            {
+                                <td>
+                                    <button type="button" class="btn btn-xs btn-warning btn-primary-outline" onclick="location.href='@Url.Action("EditScholarship", "Employee" , new { id=es.s_id, back = es.employee_id })'"><span class="fa fa-edit"></span></button>
+                                    <button type="button" class="btn btn-xs btn-danger btn-primary-outline" onclick="location.href='@Url.Action("DeleteScholarship", "Employee" , new { id=es.s_id, back = es.employee_id })'"><span class="fa fa-remove"></span></button>
+                                </td>
+                            }
+                            
+                            <td>
+                                @es.title
+                            </td>
+                            <td>
+                                @es.nature
+                            </td>
+                            <td>
+                                @es.sponsor
+                            </td>
+                            @{
+                                DateTime id = Convert.ToDateTime(es.inclusive_date.ToString());
+                                var inclusive_date = id.ToString("yyyy-MM-dd");
+                            }
+
+                            <td>
+                                @inclusive_date
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Teaching Experience
+                @if (Session["User_role"].ToString() == "Administrator")
+                {
+                    <button type="button" class="btn btn-xs btn-primary btn-primary-outline" onclick="location.href='@Url.Action("TeachingExperience", "Employee" , new { id= url })'"><span class="fa fa-plus"></span></button>
+                }  
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        @if (Session["User_role"].ToString() == "Administrator")
+                        {
+                            <th>Action</th>
+                        }
+                        
+                        <th>Designation</th>
+                        <th>Institution Location</th>
+                        <th>Employment Date</th>
+                        <th>Appointment Status</th>
+                        <th>Working Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var ete in ViewBag.EmployeeTeachingExperience)
+                    {
+                        <tr>
+                            @if (Session["User_role"].ToString() == "Administrator")
+                            {
+                                <td>
+                                    <button type="button" class="btn btn-xs btn-warning btn-primary-outline" onclick="location.href='@Url.Action("EditTeachingExperience", "Employee" , new { id=ete.te_id, back = ete.employee_id })'"><span class="fa fa-edit"></span></button>
+                                    <button type="button" class="btn btn-xs btn-danger btn-primary-outline" onclick="location.href='@Url.Action("DeleteTeachingExperience", "Employee" , new { id=ete.te_id, back = ete.employee_id })'"><span class="fa fa-remove"></span></button>
+                                </td>
+                            }
+                            
+                            <td>
+                                @ete.designation
+                            </td>
+                            <td>
+                                @ete.institution_location
+                            </td>
+                            @{
+                                DateTime ed = Convert.ToDateTime(ete.employment_date.ToString());
+                                var employment_date = ed.ToString("yyyy-MM-dd");
+                            }
+                            <td>
+                                @employment_date
+                            </td>
+                            <td>
+                                @ete.appointment_status
+                            </td>
+                            <td>
+                                @ete.working_status
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Innovation
+                @if (Session["User_role"].ToString() == "Administrator")
+                {
+                    <button type="button" class="btn btn-xs btn-primary btn-primary-outline" onclick="location.href='@Url.Action("Innovation", "Employee" , new { id= url })'"><span class="fa fa-plus"></span></button>
+                }  
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        @if (Session["User_role"].ToString() == "Administrator")
+                        {
+                            <th>Action</th>
+                        }
+                       
+                        <th>Innovation Name</th>
+                        <th>Patent No.</th>
+                        <th>Year Patented</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var ei in ViewBag.EmployeeInnovation)
+                    {
+                        <tr>
+                            @if (Session["User_role"].ToString() == "Administrator")
+                            {
+                                <td>
+                                    <button type="button" class="btn btn-xs btn-warning btn-primary-outline" onclick="location.href='@Url.Action("EditInnovation", "Employee" , new { id=ei.i_id, back = ei.employee_id })'"><span class="fa fa-edit"></span></button>
+                                    <button type="button" class="btn btn-xs btn-danger btn-primary-outline" onclick="location.href='@Url.Action("DeleteInnovation", "Employee" , new { id=ei.i_id, back = ei.employee_id })'"><span class="fa fa-remove"></span></button>
+                                </td>
+                            }
+                             
+                            <td>
+                                @ei.innovation_name
+                            </td>
+                            <td>
+                                @ei.patent_no
+                            </td>
+                            <td>
+                                @ei.year_patented
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Administrative Experience
+                @if (Session["User_role"].ToString() == "Administrator")
+                {
+                    <button type="button" class="btn btn-xs btn-primary btn-primary-outline" onclick="location.href='@Url.Action("AdministrativeExperience", "Employee" , new { id= url })'"><span class="fa fa-plus"></span></button>
+                }  
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        @if (Session["User_role"].ToString() == "Administrator")
+                        {
+                            <th>Action</th>
+                        }
+                        
+                        <th>Position</th>
+                        <th>Institution Location</th>
+                        <th>Employment Date</th>
+                        <th>Appointment Status</th>
+                        <th>Working Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var eae in ViewBag.EmployeeAdministrativeExperience)
+                    {
+                        <tr>
+                            @if (Session["User_role"].ToString() == "Administrator")
+                            {
+                                <td>
+                                    <button type="button" class="btn btn-xs btn-warning btn-primary-outline" onclick="location.href='@Url.Action("EditAdministrativeExperience", "Employee" , new { id=eae.ae_id, back = eae.employee_id })'"><span class="fa fa-edit"></span></button>
+                                    <button type="button" class="btn btn-xs btn-danger btn-primary-outline" onclick="location.href='@Url.Action("DeleteAdministrativeExperience", "Employee" , new { id=eae.ae_id, back = eae.employee_id })'"><span class="fa fa-remove"></span></button>
+                                </td>
+                            }
+                            
+                            <td>
+                                @eae.position
+                            </td>
+                            <td>
+                                @eae.institution_location
+                            </td>
+                            @{
+                                DateTime ed = Convert.ToDateTime(eae.employment_date.ToString());
+                                var employment_date = ed.ToString("yyyy-MM-dd");
+                            }
+
+                            <td>
+                                @employment_date
+                            </td>
+                            <td>
+                                @eae.appointment_status
+                            </td>
+                            <td>
+                                @eae.working_status
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Service as Coach
+                @if (Session["User_role"].ToString() == "Administrator")
+                {
+                    <button type="button" class="btn btn-xs btn-primary btn-primary-outline" onclick="location.href='@Url.Action("ServiceCoach", "Employee" , new { id= url })'"><span class="fa fa-plus"></span></button>
+                }  
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        @if (Session["User_role"].ToString() == "Administrator")
+                        {
+                            <th>Action</th>
+                        }
+                        
+                        <th>Nature of Activity</th>
+                        <th>Nature of Service Rendered</th>
+                        <th>Level of Participation in Competition</th>
+                        <th>Inclusive Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var esc in ViewBag.EmployeeServiceCoach)
+                    {
+                        <tr>
+                            @if (Session["User_role"].ToString() == "Administrator")
+                            {
+                                <td>
+                                    <button type="button" class="btn btn-xs btn-warning btn-primary-outline" onclick="location.href='@Url.Action("EditServiceCoach", "Employee" , new { id=esc.sc_id, back = esc.employee_id })'"><span class="fa fa-edit"></span></button>
+                                    <button type="button" class="btn btn-xs btn-danger btn-primary-outline" onclick="location.href='@Url.Action("DeleteServiceCoach", "Employee" , new { id=esc.sc_id, back = esc.employee_id })'"><span class="fa fa-remove"></span></button>
+                                </td>
+                            }
+                            
+                            <td>
+                                @esc.nature_activity
+                            </td>
+                            <td>
+                                @esc.nature_service_rendered
+                            </td>
+                            <td>
+                                @esc.level_participation_competition
+                            </td>
+                            @{
+                                DateTime id = Convert.ToDateTime(esc.inclusive_date.ToString());
+                                var inclusive_date = id.ToString("yyyy-MM-dd");
+                            }
+
+                            <td>
+                                @inclusive_date
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+    
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Service Award
+                @if (Session["User_role"].ToString() == "Administrator")
+                {
+                    <button type="button" class="btn btn-xs btn-primary btn-primary-outline" onclick="location.href='@Url.Action("ServiceAward", "Employee" , new { id= url })'"><span class="fa fa-plus"></span></button>
+                }  
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        @if (Session["User_role"].ToString() == "Administrator")
+                        {
+                            <th>Action</th>
+                        }
+                        
+                        <th>Title</th>
+                        <th>Field</th>
+                        <th>Organization</th>
+                        <th>Year Obtained</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var esa in ViewBag.EmployeeServiceAward)
+                    {
+                        <tr>
+                            @if (Session["User_role"].ToString() == "Administrator")
+                            {
+                                <td>
+                                    <button type="button" class="btn btn-xs btn-warning btn-primary-outline" onclick="location.href='@Url.Action("EditServiceAward", "Employee" , new { id=esa.sa_id, back = esa.employee_id })'"><span class="fa fa-edit"></span></button>
+                                    <button type="button" class="btn btn-xs btn-danger btn-primary-outline" onclick="location.href='@Url.Action("DeleteServiceAward", "Employee" , new { id=esa.sa_id, back = esa.employee_id })'"><span class="fa fa-remove"></span></button>
+                                </td>
+                            }
+                            
+                            <td>
+                                @esa.title
+                            </td>
+                            <td>
+                                @esa.field
+                            </td>
+                            <td>
+                                @esa.organization
+                            </td>
+                            <td>
+                                @esa.year_obtained
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Academic Honors
+                @if (Session["User_role"].ToString() == "Administrator")
+                {
+                    <button type="button" class="btn btn-xs btn-primary btn-primary-outline" onclick="location.href='@Url.Action("AcademicHonor", "Employee" , new { id= url })'"><span class="fa fa-plus"></span></button>
+                }  
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        @if (Session["User_role"].ToString() == "Administrator")
+                        {
+                            <th>Action</th>
+                        }
+                        
+                        <th>Honors</th>
+                        <th>Institution Location</th>
+                        <th>Degree</th>
+                        <th>Year Obtained</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var eah in ViewBag.EmployeeAcademicHonor)
+                    {
+                        <tr>
+                            @if (Session["User_role"].ToString() == "Administrator")
+                            {
+                                <td>
+                                    <button type="button" class="btn btn-xs btn-warning btn-primary-outline" onclick="location.href='@Url.Action("EditAcademicHonor", "Employee" , new { id=eah.ah_id, back = eah.employee_id })'"><span class="fa fa-edit"></span></button>
+                                    <button type="button" class="btn btn-xs btn-danger btn-primary-outline" onclick="location.href='@Url.Action("DeleteAcademicHonor", "Employee" , new { id=eah.ah_id, back = eah.employee_id })'"><span class="fa fa-remove"></span></button>
+                                </td>
+                            }
+                            
+                            <td>
+                                @eah.honors
+                            </td>
+                            <td>
+                                @eah.institution_location
+                            </td>
+                            <td>
+                                @eah.degree
+                            </td>
+                            <td>
+                                @eah.year_obtained
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Published Books and Researches
+                @if (Session["User_role"].ToString() == "Administrator")
+                {
+                    <button type="button" class="btn btn-xs btn-primary btn-primary-outline" onclick="location.href='@Url.Action("PublishedResearchBook", "Employee" , new { id= url })'"><span class="fa fa-plus"></span></button>
+                }  
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        @if (Session["User_role"].ToString() == "Administrator")
+                        {
+                            <th>Action</th>
+                        }
+                        
+                        <th>Title</th>
+                        <th>Nature</th>
+                        <th>Role</th>
+                        <th>Level</th>
+                        <th>Publisher</th>
+                        <th>Date of Publication</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var epr in ViewBag.EmployeePublishedResearchBook)
+                    {
+                        <tr>
+                            @if (Session["User_role"].ToString() == "Administrator")
+                            {
+                                <td>
+                                    <button type="button" class="btn btn-xs btn-warning btn-primary-outline" onclick="location.href='@Url.Action("EditPublishedResearchBook", "Employee" , new { id=epr.pbr_id, back = epr.employee_id })'"><span class="fa fa-edit"></span></button>
+                                    <button type="button" class="btn btn-xs btn-danger btn-primary-outline" onclick="location.href='@Url.Action("DeletePublishedResearchBook", "Employee" , new { id=epr.pbr_id, back = epr.employee_id })'"><span class="fa fa-remove"></span></button>
+                                </td>
+                            }
+                             
+                            <td>
+                                @epr.title
+                            </td>
+                            <td>
+                                @epr.nature
+                            </td>
+                            <td>
+                                @epr.role
+                            </td>
+                            <td>
+                                @epr.pbr_level
+                            </td>
+                            <td>
+                                @epr.publisher
+                            </td>
+                            @{
+                                DateTime dp = Convert.ToDateTime(epr.date_publication.ToString());
+                                var date_publication = dp.ToString("yyyy-MM-dd");
+                            }
+                            <td>
+                                @date_publication
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Membership of Professional Organization
+                @if (Session["User_role"].ToString() == "Administrator")
+                {
+                    <button type="button" class="btn btn-xs btn-primary btn-primary-outline" onclick="location.href='@Url.Action("MembershipProfessionalOrganization", "Employee" , new { id= url })'"><span class="fa fa-plus"></span></button>
+                }  
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        @if (Session["User_role"].ToString() == "Administrator")
+                        {
+                            <th>Action</th>
+                        }
+                        
+                        <th>Name of the Organization</th>
+                        <th>Nature/Category</th>
+                        <th>Date of Membership</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var empo in ViewBag.EmployeeMembershipProfessionalOrganization)
+                    {
+                        <tr>
+                            @if (Session["User_role"].ToString() == "Administrator")
+                            {
+                                <td>
+                                    <button type="button" class="btn btn-xs btn-warning btn-primary-outline" onclick="location.href='@Url.Action("EditMembershipProfessionalOrganization", "Employee" , new { id=empo.mpo_id, back = empo.employee_id })'"><span class="fa fa-edit"></span></button>
+                                    <button type="button" class="btn btn-xs btn-danger btn-primary-outline" onclick="location.href='@Url.Action("DeleteMembershipProfessionalOrganization", "Employee" , new { id=empo.mpo_id, back = empo.employee_id })'"><span class="fa fa-remove"></span></button>
+                                </td>
+                            }
+                            
+                            <td>
+                                @empo.name_organization
+                            </td>
+                            <td>
+                                @empo.nature_category
+                            </td>
+                            @{
+                                DateTime dom = Convert.ToDateTime(empo.date_of_membership.ToString());
+                                var date_of_membership = dom.ToString("yyyy-MM-dd");
+                            }
+
+                            <td>
+                                @date_of_membership
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Service in Accreditation
+                @if (Session["User_role"].ToString() == "Administrator")
+                {
+                    <button type="button" class="btn btn-xs btn-primary btn-primary-outline" onclick="location.href='@Url.Action("ServiceAccreditation", "Employee" , new { id= url })'"><span class="fa fa-plus"></span></button>
+                }  
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        @if (Session["User_role"].ToString() == "Administrator")
+                        {
+                            <th>Action</th>
+                        }
+                        
+                        <th>Name of the Acrrediting Group</th>
+                        <th>Nature of Participation</th>
+                        <th>Inclusive Date </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var esa in ViewBag.EmployeeServiceAccreditation)
+                    {
+                        <tr>
+                            @if (Session["User_role"].ToString() == "Administrator")
+                            {
+                                <td>
+                                    <button type="button" class="btn btn-xs btn-warning btn-primary-outline" onclick="location.href='@Url.Action("EditServiceAccreditation", "Employee" , new { id=esa.saccr_id, back = esa.employee_id })'"><span class="fa fa-edit"></span></button>
+                                    <button type="button" class="btn btn-xs btn-danger btn-primary-outline" onclick="location.href='@Url.Action("DeleteServiceAccreditation", "Employee" , new { id=esa.saccr_id, back = esa.employee_id })'"><span class="fa fa-remove"></span></button>
+                                </td>
+                            }
+                            
+                            <td>
+                                @esa.accrediting_group
+                            </td>
+                            <td>
+                                @esa.nature_participation
+                            </td>
+                            @{
+                                DateTime id = Convert.ToDateTime(esa.inclusive_date.ToString());
+                                var inclusive_date = id.ToString("yyyy-MM-dd");
+                            }
+                            <td>
+                                @inclusive_date
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Continuing Professional Education
+                @if (Session["User_role"].ToString() == "Administrator")
+                {
+                    <button type="button" class="btn btn-xs btn-primary btn-primary-outline" onclick="location.href='@Url.Action("ContinuingProfessionalEducation", "Employee" , new { id= url })'"><span class="fa fa-plus"></span></button>
+                }  
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        @if (Session["User_role"].ToString() == "Administrator")
+                        {
+                            <th>Action</th>
+                        }
+                        
+                        <th>Area/Topic</th>
+                        <th>Venue</th>
+                        <th>Inclusive Date</th>
+                        <th># of hours</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var ecpe in ViewBag.EmployeeContinuingProfessionalEducation)
+                    {
+                        <tr>
+                            @if (Session["User_role"].ToString() == "Administrator")
+                            {
+                                <td>
+                                    <button type="button" class="btn btn-xs btn-warning btn-primary-outline" onclick="location.href='@Url.Action("EditContinuingProfessionalEducation", "Employee" , new { id=ecpe.cpe_id, back = ecpe.employee_id })'"><span class="fa fa-edit"></span></button>
+                                    <button type="button" class="btn btn-xs btn-danger btn-primary-outline" onclick="location.href='@Url.Action("DeleteContinuingProfessionalEducation", "Employee" , new { id=ecpe.cpe_id, back = ecpe.employee_id })'"><span class="fa fa-remove"></span></button>
+                                </td>
+                            }
+                            
+                            <td>
+                                @ecpe.area_topic
+                            </td>
+                            <td>
+                                @ecpe.venue
+                            </td>
+                            @{
+                                DateTime id = Convert.ToDateTime(ecpe.inclusive_date.ToString());
+                                var inclusive_date = id.ToString("yyyy-MM-dd");
+                            }
+                            <td>
+                                @inclusive_date
+                            </td>
+                            <td>
+                                @ecpe.number_of_hours
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Children
+                @if (Session["User_role"].ToString() == "Administrator")
+                {
+                    <button type="button" class="btn btn-xs btn-primary btn-primary-outline" onclick="location.href='@Url.Action("Children", "Employee" , new { id= url })'"><span class="fa fa-plus"></span></button>
+                }  
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        @if (Session["User_role"].ToString() == "Administrator")
+                        {
+                            <th>Action</th>
+                        }
+                        
+                        <th>First Name</th>
+                        <th>Middle Name</th>
+                        <th>Last Name</th>
+                        <th>Birth Date</th>
+                        <th>Age</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var ec in ViewBag.EmployeeChildren)
+                    {
+                        int age_c = now.Year - ec.birth_date.Year;
+                        if (now < ec.birth_date.AddYears(age_c))
+                        {
+                            age_c--;
+                        }
+
+                        <tr>
+                            @if (Session["User_role"].ToString() == "Administrator")
+                            {
+                                <td>
+                                    <button type="button" class="btn btn-xs btn-warning btn-primary-outline" onclick="location.href='@Url.Action("EditChildren", "Employee" , new { id=ec.c_id, back = ec.employee_id })'"><span class="fa fa-edit"></span></button>
+                                    <button type="button" class="btn btn-xs btn-danger btn-primary-outline" onclick="location.href='@Url.Action("DeleteChildren", "Employee" , new { id=ec.c_id, back = ec.employee_id })'"><span class="fa fa-remove"></span></button>
+                                </td>
+                            }
+                            
+                            <td>
+                                @ec.firstname
+                            </td>
+                            <td>
+                                @ec.middlename
+                            </td>
+                            <td>
+                                @ec.lastname
+                            </td>
+                            @{
+                                DateTime bd = Convert.ToDateTime(ec.birth_date.ToString());
+                                var birth_date = bd.ToString("yyyy-MM-dd");
+                            }
+                            <td>
+                                @birth_date
+                            </td>
+                            
+                            <td>
+                                @age_c
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Service as PRC examiner
+                @if (Session["User_role"].ToString() == "Administrator")
+                {
+                    <button type="button" class="btn btn-xs btn-primary btn-primary-outline" onclick="location.href='@Url.Action("ServicePRCExaminer", "Employee" , new { id= url })'"><span class="fa fa-plus"></span></button>
+                }  
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        @if (Session["User_role"].ToString() == "Administrator")
+                        {
+                            <th>Action</th>
+                        }
+                        
+                        <th>Name of Examination</th>
+                        <th>Venue</th>
+                        <th>Inclusive Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var ese in ViewBag.EmployeeServicePRCExaminer)
+                    {
+                        <tr>
+                            @if (Session["User_role"].ToString() == "Administrator")
+                            {
+                                <td>
+                                    <button type="button" class="btn btn-xs btn-warning btn-primary-outline" onclick="location.href='@Url.Action("EditServicePRCExaminer", "Employee" , new { id=ese.prc_id, back = ese.employee_id })'"><span class="fa fa-edit"></span></button>
+                                    <button type="button" class="btn btn-xs btn-danger btn-primary-outline" onclick="location.href='@Url.Action("DeleteServicePRCExaminer", "Employee" , new { id=ese.prc_id, back = ese.employee_id })'"><span class="fa fa-remove"></span></button>
+                                </td>
+                            }
+                            
+                            <td>
+                                @ese.name_examination
+                            </td>
+                            <td>
+                                @ese.venue
+                            </td>
+                            @{
+                                DateTime id = Convert.ToDateTime(ese.inclusive_date.ToString());
+                                var inclusive_date = id.ToString("yyyy-MM-dd");
+                            }
+                            <td>
+                                @inclusive_date
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Licensure Examination
+                @if (Session["User_role"].ToString() == "Administrator")
+                {
+                    <button type="button" class="btn btn-xs btn-primary btn-primary-outline" onclick="location.href='@Url.Action("LicensureExamination", "Employee" , new { id= url })'"><span class="fa fa-plus"></span></button>
+                }  
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        @if (Session["User_role"].ToString() == "Administrator")
+                        {
+                            <th>Action</th>
+                        }
+                        
+                        <th>Examination</th>
+                        <th>Rating</th>
+                        <th>Year</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var ele in ViewBag.EmployeeLicensureExamination)
+                    {
+                        <tr>
+                            @if (Session["User_role"].ToString() == "Administrator")
+                            {
+                                <td>
+                                    <button type="button" class="btn btn-xs btn-warning btn-primary-outline" onclick="location.href='@Url.Action("EditLicensureExamination", "Employee" , new { id=ele.le_id, back = ele.employee_id })'"><span class="fa fa-edit"></span></button>
+                                    <button type="button" class="btn btn-xs btn-danger btn-primary-outline" onclick="location.href='@Url.Action("DeleteLicensureExamination", "Employee" , new { id=ele.le_id, back = ele.employee_id })'"><span class="fa fa-remove"></span></button>
+                                </td>
+                            }
+                            
+                            <td>
+                                @ele.examination
+                            </td>
+                            <td>
+                                @ele.rating
+                            </td>
+                            <td>
+                                @ele.year
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Service as Consultant/Adviser
+                @if (Session["User_role"].ToString() == "Administrator")
+                {
+                    <button type="button" class="btn btn-xs btn-primary btn-primary-outline" onclick="location.href='@Url.Action("ServiceConsultant", "Employee" , new { id= url })'"><span class="fa fa-plus"></span></button>
+                }  
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        @if (Session["User_role"].ToString() == "Administrator")
+                        {
+                            <th>Action</th>
+                        }
+                        
+                        <th>Nature</th>
+                        <th>Sponsor and Location</th>
+                        <th>Level</th>
+                        <th>Inclusive Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var esc in ViewBag.EmployeeServiceConsultant)
+                    {
+                        <tr>
+                            @if (Session["User_role"].ToString() == "Administrator")
+                            {
+                                <td>
+                                    <button type="button" class="btn btn-xs btn-warning btn-primary-outline" onclick="location.href='@Url.Action("EditServiceConsultant", "Employee" , new { id=esc.sca_id, back = esc.employee_id })'"><span class="fa fa-edit"></span></button>
+                                    <button type="button" class="btn btn-xs btn-danger btn-primary-outline" onclick="location.href='@Url.Action("DeleteServiceConsultant", "Employee" , new { id=esc.sca_id, back = esc.employee_id })'"><span class="fa fa-remove"></span></button>
+                                </td>
+                            }
+                            
+                            <td>
+                                @esc.nature
+                            </td>
+                            <td>
+                                @esc.sponsor_location
+                            </td>
+                            <td>
+                                @esc.sca_level
+                            </td>
+                            @{
+                                DateTime id = Convert.ToDateTime(esc.inclusive_date.ToString());
+                                var inclusive_date = id.ToString("yyyy-MM-dd");
+                            }
+                            <td>
+                                @inclusive_date
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Service as Adviser
+                @if (Session["User_role"].ToString() == "Administrator")
+                {
+                    <button type="button" class="btn btn-xs btn-primary btn-primary-outline" onclick="location.href='@Url.Action("ServiceAdviser", "Employee" , new { id= url })'"><span class="fa fa-plus"></span></button>
+                }  
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        @if (Session["User_role"].ToString() == "Administrator")
+                        {
+                            <th>Action</th>
+                        }
+                        
+                        <th>Title</th>
+                        <th>Nature</th>
+                        <th>Name of Student</th>
+                        <th>Category</th>
+                        <th>Institution</th>
+                        <th>Inclusive Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var esa in ViewBag.EmployeeServiceAdviser)
+                    {
+                        <tr>
+                            @if (Session["User_role"].ToString() == "Administrator")
+                            {
+                                <td>
+                                    <button type="button" class="btn btn-xs btn-warning btn-primary-outline" onclick="location.href='@Url.Action("EditServiceAdviser", "Employee" , new { id=esa.sadvi_id, back = esa.employee_id })'"><span class="fa fa-edit"></span></button>
+                                    <button type="button" class="btn btn-xs btn-danger btn-primary-outline" onclick="location.href='@Url.Action("DeleteServiceAdviser", "Employee" , new { id=esa.sadvi_id, back = esa.employee_id })'"><span class="fa fa-remove"></span></button>
+                                </td>
+                            }
+                            
+                            <td>
+                                @esa.title
+                            </td>
+                            <td>
+                                @esa.nature
+                            </td>
+                            <td>
+                                @esa.name_student
+                            </td>
+                            <td>
+                                @esa.category
+                            </td>
+                            <td>
+                                @esa.institution
+                            </td>
+                            @{
+                                DateTime id = Convert.ToDateTime(esa.inclusive_date.ToString());
+                                var inclusive_date = id.ToString("yyyy-MM-dd");
+                            }
+                            <td>
+                                @inclusive_date
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Beneficiaries
+                @if (Session["User_role"].ToString() == "Administrator")
+                {
+                    <button type="button" class="btn btn-xs btn-primary btn-primary-outline" onclick="location.href='@Url.Action("Beneficiaries", "Employee" , new { id= url })'"><span class="fa fa-plus"></span></button>
+                }  
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        @if (Session["User_role"].ToString() == "Administrator")
+                        {
+                            <th>Action</th>
+                        }
+                        
+                        <th>First Name</th>
+                        <th>Middle Name</th>
+                        <th>Last Name</th>
+                        <th>Birth Date</th>
+                        <th>Age</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var eb in ViewBag.EmployeeBeneficiaries)
+                    {
+                        DateTime noww = DateTime.Today;
+                        int agee = noww.Year - eb.birth_date.Year;
+                        if (noww < eb.birth_date.AddYears(agee))
+                        {
+                            agee--;
+                        }
+
+                        DateTime dtt = Convert.ToDateTime(eb.birth_date.ToString());
+                        var datee = dtt.ToShortDateString();
+
+                        <tr>
+                            @if (Session["User_role"].ToString() == "Administrator")
+                            {
+                                <td>
+                                    <button type="button" class="btn btn-xs btn-warning btn-primary-outline" onclick="location.href='@Url.Action("EditBeneficiaries", "Employee" , new { id=eb.r_id, back = eb.employee_id })'"><span class="fa fa-edit"></span></button>
+                                    <button type="button" class="btn btn-xs btn-danger btn-primary-outline" onclick="location.href='@Url.Action("DeleteBeneficiaries", "Employee" , new { id=eb.r_id, back = eb.employee_id })'"><span class="fa fa-remove"></span></button>
+                                </td>
+                            }
+                            
+                            <td>
+                                @eb.firstname
+                            </td>
+                            <td>
+                                @eb.middlename
+                            </td>
+                            <td>
+                                @eb.lastname
+                            </td>
+                            <td>
+                                @datee
+                            </td>
+                            <td>
+                                @agee
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Employee Training
+                @if (Session["User_role"].ToString() == "Administrator")
+                {
+                    <button type="button" class="btn btn-xs btn-primary btn-primary-outline" onclick="location.href='@Url.Action("Training", "Employee" , new { id= url })'"><span class="fa fa-plus"></span></button>
+                }  
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        @if (Session["User_role"].ToString() == "Administrator")
+                        {
+                            <th>Action</th>
+                        }
+                        
+                        <th>Training</th>
+                        <th>Title</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var et in ViewBag.EmployeeTraining)
+                    {
+                        <tr>
+                            @if (Session["User_role"].ToString() == "Administrator")
+                            {
+                                <td>
+                                    <button type="button" class="btn btn-xs btn-warning btn-primary-outline" onclick="location.href='@Url.Action("EditTraining", "Employee" , new { id=et.et_id, back = et.employee_id })'"><span class="fa fa-edit"></span></button>
+                                    <button type="button" class="btn btn-xs btn-danger btn-primary-outline" onclick="location.href='@Url.Action("DeleteTraining", "Employee" , new { id=et.et_id, back = et.employee_id })'"><span class="fa fa-remove"></span></button>
+                                </td>
+                            }
+                            
+                            <td>
+                                @et.training
+                            </td>
+                            <td>
+                                @et.title
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Performance
+                @if (Session["User_role"].ToString() == "Administrator")
+                {
+                    <button type="button" class="btn btn-xs btn-primary btn-primary-outline" onclick="location.href='@Url.Action("Performance", "Employee" , new { id= url })'"><span class="fa fa-plus"></span></button>
+                }  
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr> 
+                        @if (Session["User_role"].ToString() == "Administrator")
+                        {
+                            <th>Action</th>
+                        }
+                        
+                        <th>Evaluation Date</th>
+                        <th>Evaluation Period</th>
+                        <th>Semester</th>
+                        <th>Evaluator</th>
+                        <th>Evaluation Score</th>
+                        <th>Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var ep in ViewBag.EmployeePerformance)
+                    {
+                        <tr>
+                            @if (Session["User_role"].ToString() == "Administrator")
+                            {
+                                <td>
+                                    <button type="button" class="btn btn-xs btn-warning btn-primary-outline" onclick="location.href='@Url.Action("EditPerformance", "Employee" , new { id=ep.p_id, back = ep.employee_id })'"><span class="fa fa-edit"></span></button>
+                                    <button type="button" class="btn btn-xs btn-danger btn-primary-outline" onclick="location.href='@Url.Action("DeletePerformance", "Employee" , new { id=ep.p_id, back = ep.employee_id })'"><span class="fa fa-remove"></span></button>
+                                </td>
+                            }
+                            
+                            @{
+                                DateTime ed = Convert.ToDateTime(ep.evaluation_date.ToString());
+                                var evaluation_date = ed.ToString("yyyy-MM-dd");
+                            }
+                            <td>
+                                @evaluation_date
+                            </td>
+                            <td>
+                                @ep.evaluation_period
+                            </td>
+                            <td>
+                                @ep.semester
+                            </td>
+                            <td>
+                                @ep.evaluator
+                            </td>
+                            <td>
+                                @ep.evaluation_score
+                            </td>
+                            <td>
+                                @ep.rating
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Date in Organization
+                @if (Session["User_role"].ToString() == "Administrator")
+                {
+                    <button type="button" class="btn btn-xs btn-primary btn-primary-outline" onclick="location.href='@Url.Action("DateOrganization", "Employee" , new { id= url })'"><span class="fa fa-plus"></span></button>
+                }  
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        @if (Session["User_role"].ToString() == "Administrator")
+                        {
+                            <th>Action</th>
+                        }
+                        
+                        <th>Activity</th>
+                        <th># of days</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var edo in ViewBag.EmployeeDateOrganization)
+                    {
+                        <tr>
+                            @if (Session["User_role"].ToString() == "Administrator")
+                            {
+                                <td>
+                                    <button type="button" class="btn btn-xs btn-warning btn-primary-outline" onclick="location.href='@Url.Action("EditDateOrganization", "Employee" , new { id=edo.do_id, back = edo.employee_id })'"><span class="fa fa-edit"></span></button>
+                                    <button type="button" class="btn btn-xs btn-danger btn-primary-outline" onclick="location.href='@Url.Action("DeleteDateOrganization", "Employee" , new { id=edo.do_id, back = edo.employee_id })'"><span class="fa fa-remove"></span></button>
+                                </td>
+                            }
+                            
+                            <td>
+                                @edo.activity
+                            </td>
+                            <td>
+                                @edo.number_of_days
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Service Record
+                @if (Session["User_role"].ToString() == "Administrator")
+                {
+                    <button type="button" class="btn btn-xs btn-primary btn-primary-outline" onclick="location.href='@Url.Action("ServiceRecord", "Employee" , new { id= url })'"><span class="fa fa-plus"></span></button>
+                }  
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        @if (Session["User_role"].ToString() == "Administrator")
+                        {
+                            <th>Action</th>
+                        }
+                        
+                        <th>Years in Organization</th>
+                        <th>Years of Probationary</th>
+                        <th>Years of Permanent</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var esr in ViewBag.EmployeeServiceRecord)
+                    {
+                        <tr>
+                            @if (Session["User_role"].ToString() == "Administrator")
+                            {
+                                <td>
+                                    <button type="button" class="btn btn-xs btn-warning btn-primary-outline" onclick="location.href='@Url.Action("EditServiceRecord", "Employee" , new { id=esr.sr_id, back = esr.employee_id })'"><span class="fa fa-edit"></span></button>
+                                    <button type="button" class="btn btn-xs btn-danger btn-primary-outline" onclick="location.href='@Url.Action("DeleteServiceRecord", "Employee" , new { id=esr.sr_id, back = esr.employee_id })'"><span class="fa fa-remove"></span></button>
+                                </td>
+                            }
+                            
+                            <td>
+                                @esr.years_in_organization
+                            </td>
+                            <td>
+                                @esr.years_in_probationary
+                            </td>
+                            <td>
+                                @esr.years_of_permanent
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+
+</section>
+<div class="clearfix"></div>

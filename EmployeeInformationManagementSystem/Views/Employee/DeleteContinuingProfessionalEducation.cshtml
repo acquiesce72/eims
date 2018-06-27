@@ -1,0 +1,63 @@
+﻿@model EmployeeInformationManagementSystem.Models.EmployeeContinuingProfessionalEducation
+
+@{
+    ViewBag.Title = "Delete Continuing Professional Education";
+}
+
+<section class="content-header">
+    <h1>
+        <small><b>Are you sure you want to delete this?</b></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-child"></i> Employee</li>
+        <li><i class="fa fa-list-alt"></i> List of Employees</li>
+        <li><i class="fa fa-info-circle"></i> Employee Details</li>
+        <li class="active"><i class="fa fa-trash"></i> Delete Continuing Professional Education</li>
+    </ol>
+</section>
+
+<section class="invoice">
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Continuing Professional Education Details
+            </h2>
+        </div>
+    </div>
+
+    <div class="row invoice-info">
+        <div class="col-sm-4 invoice-col">
+            <address>
+                <strong>Area Topic</strong><br />
+                @Html.TextBoxFor(model => model.area_topic, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Venue</strong><br />
+                @Html.TextBoxFor(model => model.venue, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Inclusive Date</strong><br />
+                @{
+                    DateTime dt = Convert.ToDateTime(Model.inclusive_date.ToString());
+                    var date = dt.ToShortDateString();
+                }
+                <input class="form-control no-gray" type="text" value="@date" readonly /><br />
+                <strong># of hours</strong><br />
+                @Html.TextBoxFor(model => model.number_of_hours, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                
+            </address>
+        </div>
+    </div>
+
+    <div class="row no-print">
+        <div class="col-xs-12">
+            <!--<a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a> -->
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color pull-right">
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<div class="clearfix"></div>
+

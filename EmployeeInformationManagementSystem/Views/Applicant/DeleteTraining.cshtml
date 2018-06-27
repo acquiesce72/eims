@@ -1,0 +1,68 @@
+﻿@model EmployeeInformationManagementSystem.Models.ApplicantTraining
+
+@{
+    ViewBag.Title = "Delete Training";
+}
+
+<section class="content-header">
+    <h1>
+        <small><b>Are you sure you want to delete this?</b></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-child"></i> Applicant</li>
+        <li><i class="fa fa-list-alt"></i> List of Applicants</li>
+        <li><i class="fa fa-info-circle"></i> Applicant Details</li>
+        <li class="active"><i class="fa fa-trash"></i> Delete Training</li>
+    </ol>
+</section>
+
+<section class="invoice">
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Training Details
+            </h2>
+        </div>
+    </div>
+
+    <div class="row invoice-info">
+        <div class="col-sm-4 invoice-col">
+            <address>
+                <strong>Title</strong><br />
+                @Html.TextBoxFor(model => model.title, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Sponsor</strong><br />
+                @Html.TextBoxFor(model => model.sponsor, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Date Start</strong><br />
+                @{
+                    DateTime dt = Convert.ToDateTime(Model.date_start.ToString());
+                    var date = dt.ToShortDateString();
+                }
+                <input class="form-control no-gray" type="text" value="@date" readonly /><br />
+                <strong>Date End</strong><br />
+                @{
+                    DateTime dt2 = Convert.ToDateTime(Model.date_end.ToString());
+                    var date2 = dt2.ToShortDateString();
+                }
+                <input class="form-control no-gray" type="text" value="@date2" readonly /><br />
+                <strong># of hours</strong><br />
+                @Html.TextBoxFor(model => model.number_of_hours, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+            </address>
+        </div>
+    </div>
+
+    <div class="row no-print">
+        <div class="col-xs-12">
+            <!--<a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a> -->
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color pull-right">
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<div class="clearfix"></div>
+

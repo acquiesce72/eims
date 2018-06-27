@@ -1,0 +1,70 @@
+﻿@model EmployeeInformationManagementSystem.Models.EmployeeChildren
+
+@{
+    ViewBag.Title = "Delete Children";
+}
+
+<section class="content-header">
+    <h1>
+        <small><b>Are you sure you want to delete this?</b></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-child"></i> Employee</li>
+        <li><i class="fa fa-list-alt"></i> List of Employees</li>
+        <li><i class="fa fa-info-circle"></i> Employee Details</li>
+        <li class="active"><i class="fa fa-trash"></i> Delete Children</li>
+    </ol>
+</section>
+
+<section class="invoice">
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Children Details
+            </h2>
+        </div>
+    </div>
+
+    <div class="row invoice-info">
+        <div class="col-sm-4 invoice-col">
+            <address>
+                <strong>First Name</strong><br />
+                @Html.TextBoxFor(model => model.firstname, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Middle Name</strong><br />
+                @Html.TextBoxFor(model => model.middlename, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Last Name</strong><br />
+                @Html.TextBoxFor(model => model.lastname, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Birth Date</strong><br />
+                @{
+                    DateTime dt = Convert.ToDateTime(Model.birth_date.ToString());
+                    var date = dt.ToShortDateString();
+                }
+                <input class="form-control no-gray" type="text" value="@date" readonly /><br />
+
+                @{ 
+                    TimeSpan TSpan2 = DateTime.Now - Model.birth_date;
+                    double days2 = TSpan2.TotalDays;
+                    var c_age = (days2 / 365).ToString("0");
+                }
+                <strong>Age</strong><br />
+                <input class="form-control no-gray" type="text" value="@c_age" readonly /><br />
+            </address>
+        </div>
+    </div>
+
+    <div class="row no-print">
+        <div class="col-xs-12">
+            <!--<a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a> -->
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color pull-right">
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<div class="clearfix"></div>
+

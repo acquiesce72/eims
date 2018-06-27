@@ -1,0 +1,129 @@
+﻿@model IEnumerable<EmployeeInformationManagementSystem.Models.TrainingSeminar>
+
+@{
+    ViewBag.Title = "List of Trainings/Seminars";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        &nbsp;
+    </h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-globe"></i> Training and Seminar</li>
+        <li class="active"><i class="fa fa-list-alt"></i> List of Trainings/Seminars</li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="box box-success">
+        <div class="box-header">
+
+        </div>
+        <div class="box-body">
+            <div class="table-responsive">
+                <table id="trainingseminartable" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.title)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.nature)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.sponsor)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.location)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ts_level)
+                            </th>
+                            <th>
+                                Date Start
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.date_end)
+                            </th>
+                            <th>
+                                # of hours
+                            </th>
+                            @if (Session["User_role"].ToString() == "Administrator")
+                            {
+                                <th>
+                                    Action
+                                </th>
+                            }
+                            
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr align="center">
+                                <td>
+
+                                    @Html.DisplayFor(modelItem => item.ts_id)
+                                </td>
+                                <td>
+
+                                    @Html.DisplayFor(modelItem => item.title)
+                                </td>
+                                <td>
+
+                                    @Html.DisplayFor(modelItem => item.nature)
+                                </td>
+                                <td>
+
+                                    @Html.DisplayFor(modelItem => item.sponsor)
+                                </td>
+                                <td>
+
+                                    @Html.DisplayFor(modelItem => item.location)
+                                </td>
+                                <td>
+
+                                    @Html.DisplayFor(modelItem => item.ts_level)
+                                </td>
+                                <td>
+
+                                    @Html.DisplayFor(modelItem => item.date_start)
+                                </td>
+                                <td>
+
+                                    @Html.DisplayFor(modelItem => item.date_end)
+                                </td>
+                                <td>
+
+                                    @Html.DisplayFor(modelItem => item.number_of_hours)
+                                </td>
+
+                                @if (Session["User_role"].ToString() == "Administrator")
+                                {
+                                    <td>
+                                        <button type="button" class="btn btn-flat btn-sm btn-warning" onclick="location.href='@Url.Action("Edit", "TrainingSeminar" , new { id=item.ts_id })'"> <span class="fa fa-edit"></span></button>
+                                        <button type="button" class="btn btn-flat btn-sm btn-danger" onclick="location.href='@Url.Action("Delete", "TrainingSeminar" , new { id=item.ts_id })'"> <span class="fa fa-trash"></span></button>
+                                        <!--
+
+                                            <button type="button" class="btn btn-flat btn-sm btn-info" onclick="location.href='Url.Action("Details", "TrainingSeminar", new { id=item.ts_id })'"> <span class="glyphicon glyphicon-info-sign"></span></button>
+                                        -->
+
+                                    </td>
+                                }
+                                
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+</section>
+<!-- /.content -->

@@ -1,0 +1,78 @@
+﻿@model EmployeeInformationManagementSystem.Models.EmployeeEducationalBackground
+
+@{
+    ViewBag.Title = "Update Educational Background";
+}
+
+<section class="content-header">
+    <h1>
+        &nbsp;
+    </h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-child"></i> Employee</li>
+        <li><i class="fa fa-list-alt"></i> List of Employees</li>
+        <li><i class="fa fa-info-circle"></i> Employee Details</li>
+        <li class="active"><i class="fa fa-edit"></i> Update Educational Background</li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <form role="form">
+                <!-- left column -->
+                <div class="col-md-6">
+                    <!-- general form elements -->
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Educational Background Information</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <!-- form start -->
+                        <div class="box-body">
+                            @Html.HiddenFor(model => model.eb_id)
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.school, htmlAttributes: new { @class = "control-label" }) <label class="required">*</label>
+                                @Html.EditorFor(model => model.school, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.school, "", new { @class = "text-danger" })
+
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.school_level, htmlAttributes: new { @class = "control-label" }) <label class="required">*</label>
+                                @Html.EditorFor(model => model.school_level, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.school_level, "", new { @class = "text-danger" })
+
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.year_graduated, htmlAttributes: new { @class = "control-label" }) <label class="required">*</label>
+                                @Html.EditorFor(model => model.year_graduated, new { htmlAttributes = new { @class = "form-control", @id="yeargraduated" } })
+                                @Html.ValidationMessageFor(model => model.year_graduated, "", new { @class = "text-danger" })
+
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.honors, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.honors, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.honors, "", new { @class = "text-danger" })
+
+                            </div>
+
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <input type="submit" value="Save" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        }
+    </div>
+</section>
+

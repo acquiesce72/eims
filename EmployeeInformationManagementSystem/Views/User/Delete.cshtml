@@ -1,0 +1,124 @@
+﻿@model EmployeeInformationManagementSystem.Models.User
+
+@{
+    ViewBag.Title = "Delete User";
+}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        <small><b>Are you sure you want to delete the user @Html.DisplayFor(model => model.firstname) @Html.DisplayFor(model => model.middlename) @Html.DisplayFor(model => model.lastname)</b></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-user"></i> User</li>
+        <li><i class="fa fa-list-alt"></i> List of Users</li>
+        <li class="active"><i class="fa fa-trash"></i> Delete User</li>
+    </ol>
+</section>
+
+
+<!-- Main content -->
+<section class="invoice">
+    <!-- title row -->
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                <i class="fa fa-user"></i> User Details
+                <small class="pull-right">@DateTime.Now</small>
+            </h2>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- info row -->
+    <div class="row invoice-info">
+        <!-- /.col -->
+        <div class="col-sm-4 invoice-col">
+            <address>
+                <strong>User ID</strong><br />
+                @Html.TextBoxFor(model => model.my_id, new { @class = "form-control no-gray", @readonly = "readonly" })<br />  
+                <strong>Username</strong><br />
+                @Html.TextBoxFor(model => model.username, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Password</strong><br />
+                @Html.TextBoxFor(model => model.password, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>First Name</strong><br />
+                @Html.TextBoxFor(model => model.firstname, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Middle Name</strong><br />
+                @Html.TextBoxFor(model => model.middlename, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Last Name</strong><br />
+                @Html.TextBoxFor(model => model.lastname, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+
+            </address>
+        </div>
+
+        <!-- /.col -->
+        <div class="col-sm-4 invoice-col">
+            <address>
+                <strong>Gender</strong><br />
+                @Html.TextBoxFor(model => model.gender, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Role</strong><br />
+                @Html.TextBoxFor(model => model.role, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+
+                @{
+                    DateTime dt = Convert.ToDateTime(Model.datejoined.ToString());
+                    var date = dt.ToShortDateString();
+                    var status = "";
+
+                    if (Model.is_active)
+                    {
+                        status = "Active";
+                    }
+
+                    else
+                    {
+                        status = "Inactive";
+                    }
+                }
+                <strong>Date Joined</strong><br />
+                <input class="form-control no-gray" type="text" value="@date" readonly /><br />
+                <strong>Status</strong>
+                <input class="form-control no-gray" type="text" value="@status" readonly />
+            </address>          
+        </div>
+        <!-- /.col -->
+        <!-- /.col -->
+        <div class="col-sm-4 invoice-col">
+
+            @{
+                var url = Url.RequestContext.RouteData.Values["id"];
+            }
+            <br />
+            <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;
+
+            <img src="@Url.Action("UserPicture", "Home", new { id = url })" class="img-box pull-center" alt="User Image" width="190" height="190">
+            <center><strong>User Image</strong></center>
+        </div>
+        <!-- /.col -->
+
+    </div>
+    <!-- /.row -->
+    <!-- this row will not appear when printing -->
+    <div class="row no-print">
+        <div class="col-xs-12">
+            <!--<a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a> -->
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color pull-right">
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<!-- /.content -->
+<div class="clearfix"></div>
+
+
+
+
+
+

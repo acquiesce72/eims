@@ -1,0 +1,1321 @@
+﻿@model EmployeeInformationManagementSystem.Models.Employee
+
+@{
+    ViewBag.Title = "Change Employment Status of Employee";
+    var url = Url.RequestContext.RouteData.Values["id"];
+}
+
+<section class="content-header">
+    <h1>
+        <small><b>Are you sure you want to change the employment status of @Html.DisplayFor(model => model.firstname) @Html.DisplayFor(model => model.middlename) @Html.DisplayFor(model => model.lastname)?</b></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-users"></i> Employee</li>
+        <li><i class="fa fa-list-alt"></i> List of Employees</li>
+        <li class="active"><i class="fa fa-gavel"></i> Change Employment Status of Employee</li>
+    </ol>
+</section>
+
+<section class="invoice">
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                <i class="fa fa-user"></i> Employee Details
+                
+            </h2>
+        </div>
+    </div>
+    <div class="row invoice-info">
+        <div class="col-sm-4 invoice-col">
+            <address>
+                <strong>Employee Number</strong><br />
+                @Html.TextBoxFor(model => model.employee_number, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>First Name</strong><br />
+                @Html.TextBoxFor(model => model.firstname, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Middle Name</strong><br />
+                @Html.TextBoxFor(model => model.middlename, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Last Name</strong><br />
+                @Html.TextBoxFor(model => model.lastname, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Birth Date</strong><br />
+                @{
+                    DateTime dt = Convert.ToDateTime(Model.birth_date.ToString());
+                    var date = dt.ToShortDateString();
+                }
+                <input class="form-control no-gray" type="text" value="@date" readonly /><br />
+                <strong>Birth Place</strong><br />
+                @Html.TextBoxFor(model => model.birth_place, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                @{
+                    TimeSpan TSpan = DateTime.Now - Model.birth_date;
+                    double days = TSpan.TotalDays;
+                    var age = (days / 365).ToString("0");
+                }
+
+                <strong>Age</strong><br />
+                <input class="form-control no-gray" type="text" value="@age" readonly /><br />
+                <strong>Gender</strong><br />
+                @Html.TextBoxFor(model => model.gender, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Civil Status</strong><br />
+                @Html.TextBoxFor(model => model.civil_status, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Contact Number</strong><br />
+                @Html.TextBoxFor(model => model.contact_number, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+
+
+            </address>
+        </div>
+
+        <div class="col-sm-4 invoice-col">
+            <address>
+
+                <strong>Address</strong><br />
+                @Html.TextBoxFor(model => model.address, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Height</strong><br />
+                @Html.TextBoxFor(model => model.height, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Weight</strong><br />
+                @Html.TextBoxFor(model => model.weight, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Citizenship</strong><br />
+                @Html.TextBoxFor(model => model.citizenship, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Blood Type</strong><br />
+                @Html.TextBoxFor(model => model.blood_type, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Contact Person</strong><br />
+                @Html.TextBoxFor(model => model.contact_person, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Marriage Date</strong><br />
+                @{
+                    var mad = "";
+
+                    if (Model.marriage_date != null)
+                    {
+                        DateTime md = Convert.ToDateTime(Model.marriage_date.ToString());
+                        mad = md.ToShortDateString();
+                    }
+
+                }
+                <input class="form-control no-gray" type="text" value="@mad" readonly /><br />
+                <strong>Marriage Place</strong><br />
+                @Html.TextBoxFor(model => model.marriage_place, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Spouse Name</strong><br />
+                @Html.TextBoxFor(model => model.spouse_name, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Spouse Occupation</strong><br />
+                @Html.TextBoxFor(model => model.spouse_occupation, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+
+
+            </address>
+        </div>
+
+        <div class="col-sm-4 invoice-col">
+
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;
+
+            <img src="@Url.Action("EmployeePicture", "Home", new { id = url })" class="img-circle pull-center" alt="User Image" width="190" height="190">
+            <center><strong>Employee Image</strong></center>
+            <br />
+
+            <strong>Fathers Name</strong><br />
+            @Html.TextBoxFor(model => model.father_name, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+            <strong>Fathers Occupation</strong><br />
+            @Html.TextBoxFor(model => model.father_occupation, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+            <strong>Mothers Name</strong><br />
+            @Html.TextBoxFor(model => model.mother_name, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+            <strong>Mothers Occupation</strong><br />
+            @Html.TextBoxFor(model => model.mother_occupation, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+            <strong>Confirmation Date</strong><br />
+            @{
+                DateTime cd = Convert.ToDateTime(Model.confirmation_date.ToString());
+                var cod = cd.ToShortDateString();
+            }
+            <input class="form-control no-gray" type="text" value="@cod" readonly /><br />
+            <strong>Confirmation Place</strong><br />
+            @Html.TextBoxFor(model => model.confirmation_place, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+
+            @{
+                var status = "";
+
+                if (Model.is_active)
+                {
+                    status = "Active";
+                }
+
+                else
+                {
+                    status = "Passive";
+                }
+            }
+
+            <strong>Employment Status</strong><br />
+            <input class="form-control no-gray" type="text" value="@status" readonly /><br />
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Employee Record
+            </h2>
+        </div>
+    </div>
+    <div class="row invoice-info">
+        <div class="col-sm-4 invoice-col">
+            <address>
+                <strong>SSS</strong><br />
+                @Html.TextBoxFor(model => model.sss, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Tin</strong><br />
+                @Html.TextBoxFor(model => model.tin, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Pag-IBIG</strong><br />
+                @Html.TextBoxFor(model => model.pagibig, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>PhilHealth</strong><br />
+                @Html.TextBoxFor(model => model.philhealth, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Employment Date</strong><br />
+                @{
+                    var empd = "";
+
+                    if (Model.employment_date != null)
+                    {
+                        DateTime emd = Convert.ToDateTime(Model.employment_date.ToString());
+                        empd = emd.ToShortDateString();
+                    }
+
+                }
+                <input class="form-control no-gray" type="text" value="@empd" readonly /><br />
+            </address>
+        </div>
+
+        <div class="col-sm-4 invoice-col">
+            <address>
+                <strong>Department</strong><br />
+                @Html.TextBoxFor(model => model.department, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Educational Attainment</strong><br />
+                @Html.TextBoxFor(model => model.educational_attainment, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Date Permanent</strong><br />
+                @{
+                    var dep = "";
+
+                    if (Model.date_permanent != null)
+                    {
+                        DateTime dp = Convert.ToDateTime(Model.date_permanent.ToString());
+                        dep = dp.ToShortDateString();
+                    }
+                }
+                <input class="form-control no-gray" type="text" value="@dep" readonly /><br />
+                <strong>Appointment Status</strong><br />
+                @Html.TextBoxFor(model => model.appointment_status, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+            </address>
+        </div>
+        <div class="col-sm-4 invoice-col">
+            <address>
+                <strong>Employment Type</strong><br />
+                @Html.TextBoxFor(model => model.employment_type, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Position</strong><br />
+                @Html.TextBoxFor(model => model.position, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Working Status</strong><br />
+                @Html.TextBoxFor(model => model.working_status, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+                <strong>Semester</strong><br />
+                @Html.TextBoxFor(model => model.semester, new { @class = "form-control no-gray", @readonly = "readonly" })<br />
+            </address>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Educational Background
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>School</th>
+                        <th>Level</th>
+                        <th>Year Graduated</th>
+                        <th>Honors</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var eb in ViewBag.EmployeeEducationalBackground)
+                    {
+                        <tr>
+                            <td>
+                                @eb.school
+                            </td>
+                            <td>
+                                @eb.school_level
+                            </td>
+                            <td>
+                                @eb.year_graduated
+                            </td>
+                            <td>
+                                @eb.honors
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Scholarship
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Nature</th>
+                        <th>Sponsor</th>
+                        <th>Inclusive Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var es in ViewBag.EmployeeScholarship)
+                    {
+                        <tr>
+                            <td>
+                                @es.title
+                            </td>
+                            <td>
+                                @es.nature
+                            </td>
+                            <td>
+                                @es.sponsor
+                            </td>
+                            @{
+                                DateTime id = Convert.ToDateTime(es.inclusive_date.ToString());
+                                var inclusive_date = id.ToString("yyyy-MM-dd");
+                            }
+
+                            <td>
+                                @inclusive_date
+                            </td>
+                        </tr>
+                                }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Teaching Experience
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Designation</th>
+                        <th>Institution Location</th>
+                        <th>Employment Date</th>
+                        <th>Appointment Status</th>
+                        <th>Working Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var ete in ViewBag.EmployeeTeachingExperience)
+                    {
+                        <tr>
+                            <td>
+                                @ete.designation
+                            </td>
+                            <td>
+                                @ete.institution_location
+                            </td>
+                            @{
+                                DateTime ed = Convert.ToDateTime(ete.employment_date.ToString());
+                                var employment_date = ed.ToString("yyyy-MM-dd");
+                            }
+                            <td>
+                                @employment_date
+                            </td>
+                            <td>
+                                @ete.appointment_status
+                            </td>
+                            <td>
+                                @ete.working_status
+                            </td>
+                        </tr>
+                                }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Innovation
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Innovation Name</th>
+                        <th>Patent No.</th>
+                        <th>Year Patented</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var ei in ViewBag.EmployeeInnovation)
+                    {
+                        <tr>
+                            <td>
+                                @ei.innovation_name
+                            </td>
+                            <td>
+                                @ei.patent_no
+                            </td>
+                            <td>
+                                @ei.year_patented
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Administrative Experience
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Position</th>
+                        <th>Institution Location</th>
+                        <th>Employment Date</th>
+                        <th>Appointment Status</th>
+                        <th>Working Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var eae in ViewBag.EmployeeAdministrativeExperience)
+                    {
+                        <tr>
+                            <td>
+                                @eae.position
+                            </td>
+                            <td>
+                                @eae.institution_location
+                            </td>
+                            @{
+                                DateTime ed = Convert.ToDateTime(eae.employment_date.ToString());
+                                var employment_date = ed.ToString("yyyy-MM-dd");
+                            }
+
+                            <td>
+                                @employment_date
+                            </td>
+                            <td>
+                                @eae.appointment_status
+                            </td>
+                            <td>
+                                @eae.working_status
+                            </td>
+                        </tr>
+                                }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Service as Coach
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Nature of Activity</th>
+                        <th>Nature of Service Rendered</th>
+                        <th>Level of Participation in Competition</th>
+                        <th>Inclusive Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var esc in ViewBag.EmployeeServiceCoach)
+                    {
+                        <tr>
+                            <td>
+                                @esc.nature_activity
+                            </td>
+                            <td>
+                                @esc.nature_service_rendered
+                            </td>
+                            <td>
+                                @esc.level_participation_competition
+                            </td>
+                            @{
+                                DateTime id = Convert.ToDateTime(esc.inclusive_date.ToString());
+                                var inclusive_date = id.ToString("yyyy-MM-dd");
+                            }
+
+                            <td>
+                                @inclusive_date
+                            </td>
+
+                        </tr>
+                                }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Service Award
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Field</th>
+                        <th>Organization</th>
+                        <th>Year Obtained</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var esa in ViewBag.EmployeeServiceAward)
+                    {
+                        <tr>
+                            <td>
+                                @esa.title
+                            </td>
+                            <td>
+                                @esa.field
+                            </td>
+                            <td>
+                                @esa.organization
+                            </td>
+                            <td>
+                                @esa.year_obtained
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Academic Honors
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Honors</th>
+                        <th>Institution Location</th>
+                        <th>Degree</th>
+                        <th>Year Obtained</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var eah in ViewBag.EmployeeAcademicHonor)
+                    {
+                        <tr>
+                            <td>
+                                @eah.honors
+                            </td>
+                            <td>
+                                @eah.institution_location
+                            </td>
+                            <td>
+                                @eah.degree
+                            </td>
+                            <td>
+                                @eah.year_obtained
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Published Books and Researches
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Nature</th>
+                        <th>Role</th>
+                        <th>Level</th>
+                        <th>Publisher</th>
+                        <th>Date of Publication</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var epr in ViewBag.EmployeePublishedResearchBook)
+                    {
+                        <tr>
+                            <td>
+                                @epr.title
+                            </td>
+                            <td>
+                                @epr.nature
+                            </td>
+                            <td>
+                                @epr.role
+                            </td>
+                            <td>
+                                @epr.pbr_level
+                            </td>
+                            <td>
+                                @epr.publisher
+                            </td>
+                            @{
+                                DateTime dp = Convert.ToDateTime(epr.date_publication.ToString());
+                                var date_publication = dp.ToString("yyyy-MM-dd");
+                            }
+                            <td>
+                                @date_publication
+                            </td>
+
+                        </tr>
+                                }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Membership of Professional Organization
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Name of the Organization</th>
+                        <th>Nature/Category</th>
+                        <th>Date of Membership</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var empo in ViewBag.EmployeeMembershipProfessionalOrganization)
+                    {
+                        <tr>
+                            <td>
+                                @empo.name_organization
+                            </td>
+                            <td>
+                                @empo.nature_category
+                            </td>
+                            @{
+                                DateTime dom = Convert.ToDateTime(empo.date_of_membership.ToString());
+                                var date_of_membership = dom.ToString("yyyy-MM-dd");
+                            }
+
+                            <td>
+                                @date_of_membership
+                            </td>
+                        </tr>
+                                }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Service in Accreditation
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Name of the Acrrediting Group</th>
+                        <th>Nature of Participation</th>
+                        <th>Inclusive Date </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var esa in ViewBag.EmployeeServiceAccreditation)
+                    {
+                        <tr>
+                            <td>
+                                @esa.accrediting_group
+                            </td>
+                            <td>
+                                @esa.nature_participation
+                            </td>
+                            @{
+                                DateTime id = Convert.ToDateTime(esa.inclusive_date.ToString());
+                                var inclusive_date = id.ToString("yyyy-MM-dd");
+                            }
+                            <td>
+                                @inclusive_date
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Continuing Professional Education
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Area/Topic</th>
+                        <th>Venue</th>
+                        <th>Inclusive Date</th>
+                        <th>Number of Hours</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var ecpe in ViewBag.EmployeeContinuingProfessionalEducation)
+                    {
+                        <tr>
+                            <td>
+                                @ecpe.area_topic
+                            </td>
+                            <td>
+                                @ecpe.venue
+                            </td>
+                            @{
+                                DateTime id = Convert.ToDateTime(ecpe.inclusive_date.ToString());
+                                var inclusive_date = id.ToString("yyyy-MM-dd");
+                            }
+                            <td>
+                                @inclusive_date
+                            </td>
+                            <td>
+                                @ecpe.number_of_hours
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Children
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Middle Name</th>
+                        <th>Last Name</th>
+                        <th>Birth Date</th>
+                        <!--<th>Age</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var ec in ViewBag.EmployeeChildren)
+                    {
+                        <tr>
+                            <td>
+                                @ec.firstname
+                            </td>
+                            <td>
+                                @ec.middlename
+                            </td>
+                            <td>
+                                @ec.lastname
+                            </td>
+                            @{
+                                DateTime bd = Convert.ToDateTime(ec.birth_date.ToString());
+                                var birth_date = bd.ToString("yyyy-MM-dd");
+                            }
+                            <td>
+                                @birth_date
+                            </td>
+                        </tr>
+                                }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Service as PRC examiner
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Name of Examination</th>
+                        <th>Venue</th>
+                        <th>Inclusive Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var ese in ViewBag.EmployeeServicePRCExaminer)
+                    {
+                        <tr>
+                            <td>
+                                @ese.name_examination
+                            </td>
+                            <td>
+                                @ese.venue
+                            </td>
+                            @{
+                                DateTime id = Convert.ToDateTime(ese.inclusive_date.ToString());
+                                var inclusive_date = id.ToString("yyyy-MM-dd");
+                            }
+                            <td>
+                                @inclusive_date
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Licensure Examination
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Examination</th>
+                        <th>Rating</th>
+                        <th>Year</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var ele in ViewBag.EmployeeLicensureExamination)
+                    {
+                        <tr>
+                            <td>
+                                @ele.examination
+                            </td>
+                            <td>
+                                @ele.rating
+                            </td>
+                            <td>
+                                @ele.year
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Service as Consultant/Adviser
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Nature</th>
+                        <th>Sponsor and Location</th>
+                        <th>Level</th>
+                        <th>Inclusive Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var esc in ViewBag.EmployeeServiceConsultant)
+                    {
+                        <tr>
+                            <td>
+                                @esc.nature
+                            </td>
+                            <td>
+                                @esc.sponsor_location
+                            </td>
+                            <td>
+                                @esc.sca_level
+                            </td>
+                            @{
+                                DateTime id = Convert.ToDateTime(esc.inclusive_date.ToString());
+                                var inclusive_date = id.ToString("yyyy-MM-dd");
+                            }
+                            <td>
+                                @inclusive_date
+                            </td>
+                        </tr>
+                                }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Service as Adviser
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Nature</th>
+                        <th>Name of Student/th>
+                        <th>Category</th>
+                        <th>Institution</th>
+                        <th>Inclusive Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var esa in ViewBag.EmployeeServiceAdviser)
+                    {
+                        <tr>
+                            <td>
+                                @esa.title
+                            </td>
+                            <td>
+                                @esa.nature
+                            </td>
+                            <td>
+                                @esa.name_student
+                            </td>
+                            <td>
+                                @esa.category
+                            </td>
+                            <td>
+                                @esa.institution
+                            </td>
+                            @{
+                                DateTime id = Convert.ToDateTime(esa.inclusive_date.ToString());
+                                var inclusive_date = id.ToString("yyyy-MM-dd");
+                            }
+                            <td>
+                                @inclusive_date
+                            </td>
+                        </tr>
+                                }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Beneficiaries
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Middle Name</th>
+                        <th>Last Name</th>
+                        <th>Age</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var eb in ViewBag.EmployeeBeneficiaries)
+                    {
+                        <tr>
+                            <td>
+                                @eb.firstname
+                            </td>
+                            <td>
+                                @eb.middlename
+                            </td>
+                            <td>
+                                @eb.lastname
+                            </td>
+                            <td>
+                                @eb.age
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Employee Training
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Training</th>
+                        <th>Title</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var et in ViewBag.EmployeeTraining)
+                    {
+                        <tr>
+                            <td>
+                                @et.training
+                            </td>
+                            <td>
+                                @et.title
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Performance
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Evaluation Date</th>
+                        <th>Evaluation Period</th>
+                        <th>Semester</th>
+                        <th>Evaluator</th>
+                        <th>Evaluation Score</th>
+                        <th>Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var ep in ViewBag.EmployeePerformance)
+                    {
+                        <tr>
+                            @{
+                                DateTime ed = Convert.ToDateTime(ep.evaluation_date.ToString());
+                                var evaluation_date = ed.ToString("yyyy-MM-dd");
+                            }
+                            <td>
+                                @evaluation_date
+                            </td>
+                            <td>
+                                @ep.evaluation_period
+                            </td>
+                            <td>
+                                @ep.semester
+                            </td>
+                            <td>
+                                @ep.evaluator
+                            </td>
+                            <td>
+                                @ep.evaluation_score
+                            </td>
+                            <td>
+                                @ep.rating
+                            </td>
+                        </tr>
+                                }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Date in Organization
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Activity</th>
+                        <th># of days</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var edo in ViewBag.EmployeeDateOrganization)
+                    {
+                        <tr>
+                            <td>
+                                @edo.activity
+                            </td>
+                            <td>
+                                @edo.number_of_days
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 class="page-header">
+                Service Record
+            </h2>
+        </div>
+    </div>
+
+    <!-- Table row -->
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Years in Organization</th>
+                        <th>Years of Probationary</th>
+                        <th>Years of Permanent</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var esr in ViewBag.EmployeeServiceRecord)
+                    {
+                        <tr>
+                            <td>
+                                @esr.years_in_organization
+                            </td>
+                            <td>
+                                @esr.years_in_probationary
+                            </td>
+                            <td>
+                                @esr.years_of_permanent
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <br />
+
+    <div class="row no-print">
+        <div class="col-xs-12">
+            <!--<a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a> -->
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color pull-right">
+                    <input type="submit" value="PASSIVE" class="btn btn-danger" />
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<div class="clearfix"></div>

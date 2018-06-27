@@ -1,0 +1,60 @@
+﻿@model EmployeeInformationManagementSystem.Models.EmployeeUploadedFile
+
+@{
+    ViewBag.Title = "Upload Employee File";
+}
+
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        &nbsp;
+    </h1>
+    <ol class="breadcrumb">
+        <li><i class="fa fa-users"></i> Employee</li>
+        <li><i class="fa fa-list-alt"></i> List of Employees</li>
+        <li class="active"><i class="fa fa-upload"></i> Upload Employee File</li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        @using (Html.BeginForm("Upload", "Employee", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <form role="form">
+                <div class="pad margin no-print">
+                    <div class="callout callout-warning" style="margin-bottom: 0!important;">
+                        <h4><i class="fa fa-warning"></i> Note:</h4>
+                        Uploading over 2MB may cause technical difficulties.
+                    </div>
+                </div>
+                <!-- right column -->
+                <div class="col-md-6">
+                    <!-- general form elements -->
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Upload File</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <!-- form start -->
+                        <div class="box-body">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.filename, htmlAttributes: new { @class = "control-label" })
+                                <input type="file" name="postedFile" />
+                                @Html.ValidationMessageFor(model => model.filename, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer">
+                            <input type="submit" id="btnUpload" value="Upload" class="btn btn-default" />                           
+                        </div>
+                    </div>
+                </div>
+            </form>
+        }
+    </div>
+</section>
+
