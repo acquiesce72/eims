@@ -585,102 +585,102 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Reports\ApplicantList.rpt">
+    <Content Include="Reports\ApplicantList.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ApplicantList.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\EmployeeListThisYear.rpt">
+    </Content>
+    <Content Include="Reports\EmployeeListThisYear.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>EmployeeListThisYear.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\SBE1List.rpt">
+    </Content>
+    <Content Include="Reports\SBE1List.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>SBE1List.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\SBE2List.rpt">
+    </Content>
+    <Content Include="Reports\SBE2List.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>SBE2List.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\SNList.rpt">
+    </Content>
+    <Content Include="Reports\SNList.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>SNList.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\SITList.rpt">
+    </Content>
+    <Content Include="Reports\SITList.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>SITList.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\SEAList.rpt">
+    </Content>
+    <Content Include="Reports\SEAList.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>SEAList.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\SEList.rpt">
+    </Content>
+    <Content Include="Reports\SEList.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>SEList.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\SBAList.rpt">
+    </Content>
+    <Content Include="Reports\SBAList.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>SBAList.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\SASList.rpt">
+    </Content>
+    <Content Include="Reports\SASList.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>SASList.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\TrainingSeminarList.rpt">
+    </Content>
+    <Content Include="Reports\TrainingSeminarList.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>TrainingSeminarList.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\PassiveList.rpt">
+    </Content>
+    <Content Include="Reports\PassiveList.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>PassiveList.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\ActiveList.rpt">
+    </Content>
+    <Content Include="Reports\ActiveList.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ActiveList.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\FullTimeList.rpt">
+    </Content>
+    <Content Include="Reports\FullTimeList.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>FullTimeList.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\PartTimeWSList.rpt">
+    </Content>
+    <Content Include="Reports\PartTimeWSList.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>PartTimeWSList.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\ProbationaryList.rpt">
+    </Content>
+    <Content Include="Reports\ProbationaryList.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ProbationaryList.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\StaffList.rpt">
+    </Content>
+    <Content Include="Reports\StaffList.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>StaffList.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\PersonnelList.rpt">
+    </Content>
+    <Content Include="Reports\PersonnelList.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>PersonnelList.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\FacultyList.rpt">
+    </Content>
+    <Content Include="Reports\FacultyList.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>FacultyList.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\AdministratorList.rpt">
+    </Content>
+    <Content Include="Reports\AdministratorList.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>AdministratorList.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\PermanentList.rpt">
+    </Content>
+    <Content Include="Reports\PermanentList.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>PermanentList.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\PartTimeASList.rpt">
+    </Content>
+    <Content Include="Reports\PartTimeASList.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>PartTimeASList.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\SubstituteList.rpt">
+    </Content>
+    <Content Include="Reports\SubstituteList.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>SubstituteList.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\EmployeeList.rpt">
+    </Content>
+    <Content Include="Reports\EmployeeList.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>EmployeeList.cs</LastGenOutput>
-    </EmbeddedResource>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
