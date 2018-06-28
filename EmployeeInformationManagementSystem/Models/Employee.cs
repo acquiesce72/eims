@@ -171,12 +171,13 @@ namespace EmployeeInformationManagementSystem.Models
         public string mother_occupation { get; set; }
 
         [Column(TypeName = "date")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Please provide confirmation date")]
+        // [Required(AllowEmptyStrings = true, ErrorMessage = "Please provide confirmation date")]
+        [Required(AllowEmptyStrings = true )]
         [Display(Name = "Confirmation Date")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime confirmation_date { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Please provide confirmation place")]
+        //[Required(AllowEmptyStrings = false, ErrorMessage = "Please provide confirmation place")]
         [StringLength(50)]
         [Display(Name = "Confirmation Place")]
         public string confirmation_place { get; set; }
